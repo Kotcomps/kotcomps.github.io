@@ -9,23 +9,25 @@
   <meta property="og:description" content="Current affairs, motivation, sports & trending topics — all in one place.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kotcomps.github.io/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236c5ce7'/><text x='50' y='72' font-size='60' font-weight='800' text-anchor='middle' fill='white'>K</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a26;
-      --bg-card-hover: #22222f;
+      --bg-primary: #08080d;
+      --bg-secondary: #0e0e16;
+      --bg-card: #14141e;
+      --bg-card-hover: #1c1c2a;
       --accent: #6c5ce7;
       --accent-light: #a29bfe;
-      --accent-glow: rgba(108, 92, 231, 0.3);
-      --text-primary: #e8e8f0;
-      --text-secondary: #8888a0;
+      --accent-glow: rgba(108, 92, 231, 0.25);
+      --text-primary: #eaeaf2;
+      --text-secondary: #8a8aa8;
       --text-muted: #55556a;
-      --border: #2a2a3a;
+      --border: #1e1e30;
       --success: #00b894;
       --warning: #fdcb6e;
       --danger: #e17055;
@@ -33,16 +35,50 @@
       --current: #e17055;
       --motivation: #00b894;
       --trending: #fdcb6e;
+      --glass: rgba(20, 20, 30, 0.7);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
-      line-height: 1.6;
+      line-height: 1.65;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* NAV */
@@ -50,48 +86,55 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(10, 10, 15, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(8, 8, 13, 0.8);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(30, 30, 48, 0.5);
       z-index: 1000;
       padding: 0 2rem;
+      transition: background 0.3s;
     }
     .nav-inner {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
+      height: 68px;
     }
     .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 900;
       color: var(--accent-light);
       text-decoration: none;
-      letter-spacing: -0.5px;
+      letter-spacing: -1px;
+      transition: transform 0.2s;
     }
+    .logo:hover { transform: scale(1.05); }
     .logo span { color: var(--text-primary); }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent-light); }
-    .nav-cta {
-      background: var(--accent);
-      color: #fff !important;
-      padding: 0.5rem 1.2rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.3rem !important;
+      border-radius: 10px !important;
       font-weight: 600 !important;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s !important;
     }
     .nav-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px var(--accent-glow);
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 24px var(--accent-glow) !important;
+      background: var(--accent) !important;
     }
     .hamburger {
       display: none;
@@ -100,7 +143,11 @@
       color: var(--text-primary);
       font-size: 1.5rem;
       cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: background 0.2s;
     }
+    .hamburger:hover { background: rgba(255,255,255,0.05); }
 
     /* HERO */
     .hero {
@@ -113,34 +160,49 @@
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.2) saturate(1.2);
+    }
+    .hero-bg::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 40%, var(--accent-glow) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 60%, rgba(0, 184, 148, 0.15) 0%, transparent 50%);
-      animation: drift 15s ease-in-out infinite;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,8,13,0.6) 0%, rgba(8,8,13,0.4) 40%, rgba(8,8,13,0.95) 100%);
     }
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(30px, -30px) rotate(1deg); }
-      66% { transform: translate(-20px, 20px) rotate(-1deg); }
+    .hero-glow {
+      position: absolute;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      opacity: 0.4;
+      animation: float 8s ease-in-out infinite;
+      z-index: 1;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-content { position: relative; z-index: 2; max-width: 750px; animation: fadeInUp 0.8s ease-out; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--bg-card);
+      background: var(--glass);
       border: 1px solid var(--border);
-      padding: 0.4rem 1rem;
+      padding: 0.45rem 1.1rem;
       border-radius: 50px;
       font-size: 0.8rem;
+      font-weight: 500;
       color: var(--accent-light);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
+      backdrop-filter: blur(10px);
     }
     .hero-badge .dot {
       width: 8px;
@@ -149,38 +211,36 @@
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
     .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      letter-spacing: -1px;
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1.5px;
     }
     .hero h1 .highlight {
       background: linear-gradient(135deg, var(--accent-light), var(--success));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
-      margin-bottom: 2rem;
-      max-width: 550px;
+      margin-bottom: 2.2rem;
+      max-width: 580px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.7;
     }
     .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .btn {
-      padding: 0.85rem 2rem;
-      border-radius: 10px;
+      padding: 0.9rem 2.2rem;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -191,10 +251,11 @@
     .btn-primary {
       background: var(--accent);
       color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--accent-glow);
+      box-shadow: 0 8px 35px var(--accent-glow);
     }
     .btn-outline {
       background: transparent;
@@ -204,57 +265,112 @@
     .btn-outline:hover {
       border-color: var(--accent);
       color: var(--accent-light);
+      background: rgba(108, 92, 231, 0.05);
     }
 
     /* SECTIONS */
     section { padding: 5rem 2rem; }
     .section-header {
-      max-width: 1200px;
-      margin: 0 auto 3rem;
+      max-width: 1280px;
+      margin: 0 auto 2.5rem;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
     }
     .section-header h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.75px;
     }
     .section-tag {
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       color: var(--accent-light);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     .view-all {
       color: var(--accent-light);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 500;
       display: flex;
       align-items: center;
       gap: 0.3rem;
+      transition: gap 0.2s;
     }
-    .view-all:hover { text-decoration: underline; }
+    .view-all:hover { gap: 0.5rem; }
+
+    /* ARTICLE IMAGE OVERLAY */
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .article-card:hover .card-img-wrap img {
+      transform: scale(1.05);
+    }
+    .card-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(transparent, rgba(20, 20, 30, 0.9));
+    }
+
+    /* LATEST BADGE */
+    .badge-latest {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      z-index: 2;
+    }
+
+    /* READING TIME */
+    .reading-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .reading-time svg { width: 12px; height: 12px; opacity: 0.6; }
 
     /* ARTICLE GRID */
     .articles-grid {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1.5rem;
     }
     .article-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
-      transition: all 0.3s;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
       text-decoration: none;
       color: inherit;
@@ -262,44 +378,31 @@
     }
     .article-card:hover {
       background: var(--bg-card-hover);
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(108, 92, 231, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(108, 92, 231, 0.1);
     }
-    .card-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-    .card-img-placeholder {
-      width: 100%;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
-    .card-body { padding: 1.3rem; }
+    .card-body { padding: 1.4rem; }
     .card-category {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 0.6rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.7rem;
       display: inline-block;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
     }
-    .cat-current { color: var(--current); background: rgba(225, 112, 85, 0.1); }
-    .cat-motivation { color: var(--motivation); background: rgba(0, 184, 148, 0.1); }
-    .cat-sports { color: var(--sports); background: rgba(9, 132, 227, 0.1); }
-    .cat-trending { color: var(--trending); background: rgba(253, 203, 110, 0.1); }
+    .cat-current { color: var(--current); background: rgba(225, 112, 85, 0.12); }
+    .cat-motivation { color: var(--motivation); background: rgba(0, 184, 148, 0.12); }
+    .cat-sports { color: var(--sports); background: rgba(9, 132, 227, 0.12); }
+    .cat-trending { color: var(--trending); background: rgba(253, 203, 110, 0.12); }
     .card-title {
       font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       line-height: 1.35;
+      letter-spacing: -0.2px;
     }
     .card-excerpt {
       font-size: 0.85rem;
@@ -309,13 +412,19 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      line-height: 1.6;
     }
     .card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
+    }
+    .card-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
     }
     .card-share {
       display: flex;
@@ -325,16 +434,18 @@
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 500;
       font-family: inherit;
-      transition: color 0.2s;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      transition: all 0.2s;
     }
-    .card-share:hover { color: var(--text-primary); }
+    .card-share:hover { color: var(--text-primary); background: rgba(108, 92, 231, 0.1); }
 
     /* FEATURED (large card) */
     .featured-grid {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1.5fr 1fr;
@@ -343,25 +454,33 @@
     .featured-main {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       position: relative;
-      min-height: 400px;
+      min-height: 440px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      transition: all 0.3s;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
     .featured-main:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
+      border-color: rgba(108, 92, 231, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     }
-    .featured-main .card-img-placeholder { position: absolute; inset: 0; height: 100%; opacity: 0.3; }
-    .featured-main .card-body { position: relative; z-index: 1; background: linear-gradient(transparent, rgba(10,10,15,0.95)); padding: 2rem; }
-    .featured-main .card-title { font-size: 1.6rem; }
+    .featured-main .card-img-wrap { position: absolute; inset: 0; height: 100%; }
+    .featured-main .card-img-wrap::after {
+      height: 70%;
+      background: linear-gradient(transparent 20%, rgba(8,8,13,0.85) 80%, rgba(8,8,13,0.98));
+    }
+    .featured-main .badge-latest { top: 16px; left: 16px; }
+    .featured-main .card-body { position: relative; z-index: 1; padding: 2rem; }
+    .featured-main .card-title { font-size: 1.7rem; letter-spacing: -0.5px; }
+    .featured-main .card-excerpt { -webkit-line-clamp: 4; }
     .featured-side { display: flex; flex-direction: column; gap: 1.5rem; }
     .featured-side .article-card { flex: 1; }
+    .featured-side .card-img-wrap { height: 160px; }
 
     /* CTA SECTION */
     .cta-section {
@@ -369,28 +488,41 @@
       background: var(--bg-secondary);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
     }
-    .cta-section h2 { font-size: 2rem; margin-bottom: 0.8rem; }
-    .cta-section p { color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(24, 119, 242, 0.08) 0%, transparent 60%);
+    }
+    .cta-section h2 { font-size: 2.2rem; margin-bottom: 0.8rem; font-weight: 800; letter-spacing: -0.5px; }
+    .cta-section p { color: var(--text-secondary); margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
     .fb-follow-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
       background: #1877f2;
       color: #fff;
-      padding: 0.9rem 2.2rem;
-      border-radius: 10px;
+      padding: 0.95rem 2.4rem;
+      border-radius: 12px;
       font-weight: 700;
       font-size: 1rem;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.25s;
       border: none;
       cursor: pointer;
       font-family: inherit;
+      box-shadow: 0 4px 20px rgba(24, 119, 242, 0.2);
     }
     .fb-follow-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(24, 119, 242, 0.3);
+      box-shadow: 0 8px 35px rgba(24, 119, 242, 0.35);
     }
     .fb-follow-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
@@ -398,22 +530,39 @@
     .stats {
       display: flex;
       justify-content: center;
-      gap: 3rem;
+      gap: 4rem;
       flex-wrap: wrap;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
     .stat { text-align: center; }
-    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--accent-light); }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-light);
+      letter-spacing: -0.5px;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
 
     /* FOOTER */
     footer {
-      padding: 3rem 2rem;
+      padding: 3.5rem 2rem;
       text-align: center;
       border-top: 1px solid var(--border);
     }
     .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
     .footer-links a:hover { color: var(--accent-light); }
     .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
 
@@ -423,19 +572,24 @@
       .nav-links {
         display: none;
         position: absolute;
-        top: 64px;
+        top: 68px;
         left: 0;
         right: 0;
-        background: var(--bg-secondary);
+        background: rgba(14, 14, 22, 0.98);
+        backdrop-filter: blur(24px);
         border-bottom: 1px solid var(--border);
         flex-direction: column;
-        padding: 1rem 2rem;
-        gap: 0.8rem;
+        padding: 1rem 1.5rem;
+        gap: 0.3rem;
       }
       .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.7rem 1rem; }
       .featured-grid { grid-template-columns: 1fr; }
+      .featured-main { min-height: 320px; }
       .articles-grid { grid-template-columns: 1fr; }
-      .stats { gap: 1.5rem; }
+      .stats { gap: 2rem; }
+      section { padding: 3.5rem 1.2rem; }
+      .hero { padding: 5rem 1.2rem 3rem; }
     }
 
     /* SHARE MODAL */
@@ -443,8 +597,8 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(12px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
@@ -453,18 +607,19 @@
     .modal {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 420px;
+      border-radius: 20px;
+      padding: 2.2rem;
+      max-width: 440px;
       width: 90%;
       text-align: center;
+      animation: fadeInUp 0.3s ease-out;
     }
-    .modal h3 { margin-bottom: 1rem; font-size: 1.2rem; }
-    .modal p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
-    .share-options { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .modal h3 { margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; }
+    .modal p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5; }
+    .share-options { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
     .share-opt {
       padding: 0.7rem 1.3rem;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid var(--border);
       background: var(--bg-secondary);
       color: var(--text-primary);
@@ -474,16 +629,18 @@
       font-weight: 500;
       transition: all 0.2s;
     }
-    .share-opt:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+    .share-opt:hover { border-color: var(--accent); background: var(--bg-card-hover); transform: translateY(-1px); }
     .modal-close {
-      margin-top: 1rem;
+      margin-top: 1.2rem;
       background: none;
       border: none;
       color: var(--text-muted);
       cursor: pointer;
       font-family: inherit;
       font-size: 0.85rem;
+      transition: color 0.2s;
     }
+    .modal-close:hover { color: var(--text-primary); }
   </style>
 </head>
 <body>
@@ -505,6 +662,10 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168d9c?w=1600&q=80" alt="Background" loading="eager">
+    </div>
+    <div class="hero-glow"></div>
     <div class="hero-content">
       <div class="hero-badge"><span class="dot"></span> Updated Daily</div>
       <h1>Stay <span class="highlight">Informed</span>. Stay <span class="highlight">Inspired</span>.</h1>
@@ -529,38 +690,56 @@
       <a href="#" class="view-all">View all &rarr;</a>
     </div>
     <div class="featured-grid">
-      <div class="featured-main" onclick="shareArticle('Why 2026 Is the Year of Global Change')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">&#128293;</div>
+      <div class="featured-main animate-in" onclick="shareArticle('Why 2026 Is the Year of Global Change')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80" alt="Basketball" loading="lazy">
+          <span class="badge-latest">Latest</span>
+        </div>
         <div class="card-body">
           <span class="card-category cat-trending">Trending</span>
           <h3 class="card-title">Wembanyama Drops 41 in Spurs' Stunning 2OT Win Over Thunder</h3>
           <p class="card-excerpt">Victor Wembanyama put up 41 points and 24 rebounds as the Spurs stunned the defending champion Thunder in Game 1 of the Western Conference Finals. The generational talent posterized Chet Holmgren in double overtime. This series is going to be electric.</p>
           <div class="card-footer">
-            <span>May 19, 2026 &middot; 5 min read</span>
+            <div class="card-footer-left">
+              <span>May 19, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
             <button class="card-share" onclick="event.stopPropagation(); shareArticle('Why 2026 Is the Year of Global Change')">&#128279; Share</button>
           </div>
         </div>
       </div>
       <div class="featured-side">
-        <a class="article-card" onclick="shareArticle('Pep Guardiola Leaves Man City After 10 Years')">
+        <a class="article-card animate-in" onclick="shareArticle('Pep Guardiola Leaves Man City After 10 Years')">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="Football" loading="lazy">
+          </div>
           <div class="card-body">
             <span class="card-category cat-sports">Sports</span>
             <h3 class="card-title">Pep Guardiola Leaves Man City After 10 Years & 17 Trophies</h3>
-            <p class="card-excerpt">End of an era. Pep Guardiola is departing Manchester City after a decade of dominance — three consecutive Premier League titles, a Champions League, and a historic treble. No manager has ever dominated English football like this. Who can possibly replace him?</p>
+            <p class="card-excerpt">End of an era. Pep Guardiola is departing Manchester City after a decade of dominance — three consecutive Premier League titles, a Champions League, and a historic treble.</p>
             <div class="card-footer">
-              <span>May 18, 2026</span>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('The Secret Habit of Highly Successful People')">&#128279; Share</button>
+              <div class="card-footer-left">
+                <span>May 18, 2026</span>
+                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+              </div>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Pep Guardiola Leaves Man City')">&#128279; Share</button>
             </div>
           </div>
         </a>
-        <a class="article-card" onclick="shareArticle('Trump Calls Off Iran Attack')">
+        <a class="article-card animate-in" onclick="shareArticle('Trump Calls Off Iran Attack')">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80" alt="World Politics" loading="lazy">
+          </div>
           <div class="card-body">
             <span class="card-category cat-current">Current Affairs</span>
             <h3 class="card-title">Trump Calls Off Iran Attack at Request of Gulf States</h3>
-            <p class="card-excerpt">In a dramatic reversal, President Trump postponed a planned US strike on Iran, saying "serious negotiations are now taking place." The Middle East sits at a crossroads as diplomacy takes center stage. Was this the right call? The debate is raging.</p>
+            <p class="card-excerpt">In a dramatic reversal, President Trump postponed a planned US strike on Iran, saying "serious negotiations are now taking place." The Middle East sits at a crossroads.</p>
             <div class="card-footer">
-              <span>May 17, 2026</span>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('World Cup 2026: Early Predictions')">&#128279; Share</button>
+              <div class="card-footer-left">
+                <span>May 17, 2026</span>
+                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3 min</span>
+              </div>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Trump Calls Off Iran Attack')">&#128279; Share</button>
             </div>
           </div>
         </a>
@@ -578,39 +757,54 @@
       <a href="#" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
-      <a class="article-card" onclick="shareArticle('Global Elections 2026: What You Need to Know')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #2d1b1b, #1a1a2e);">&#127919;</div>
+      <a class="article-card animate-in" onclick="shareArticle('Global Elections 2026: What You Need to Know')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=600&q=80" alt="Elections" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
           <h3 class="card-title">Global Elections 2026: What You Need to Know</h3>
-          <p class="card-excerpt">Over 60 countries head to the polls this year — more than any other in history. From Germany's coalition shakeup to India's pivotal state elections, from Brazil's local races to Nigeria's governorship battles, every vote carries weight. We break down the five elections most likely to reshape global politics and trade.</p>
+          <p class="card-excerpt">Over 60 countries head to the polls this year — more than any other in history. From Germany's coalition shakeup to India's pivotal state elections, every vote carries weight.</p>
           <div class="card-footer">
-            <span>May 18, 2026 &middot; 4 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global Elections 2026: What You Need to Know')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 18, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global Elections 2026')">&#128279; Share</button>
           </div>
         </div>
       </a>
-      <a class="article-card" onclick="shareArticle('AI Regulation: The New Rules Changing Everything')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1b2d1b, #1a1a2e);">&#129302;</div>
+      <a class="article-card animate-in" onclick="shareArticle('Elon Musk Loses OpenAI Lawsuit')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80" alt="AI Technology" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
           <h3 class="card-title">Elon Musk Loses OpenAI Lawsuit — Court Rules Against Him</h3>
-          <p class="card-excerpt">A court ruled against Elon Musk in his case against OpenAI and Sam Altman, marking "the latest in a string of courtroom defeats." Musk wanted OpenAI to stay non-profit. The court said no. The AI war just got personal — and Musk is losing.</p>
+          <p class="card-excerpt">A court ruled against Elon Musk in his case against OpenAI and Sam Altman, marking "the latest in a string of courtroom defeats." The AI war just got personal.</p>
           <div class="card-footer">
-            <span>May 17, 2026 &middot; 6 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('AI Regulation: The New Rules Changing Everything')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 17, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 6 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Elon Musk Loses OpenAI Lawsuit')">&#128279; Share</button>
           </div>
         </div>
       </a>
-      <a class="article-card" onclick="shareArticle('Climate Summit 2026: Bold Promises or Real Action?')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1b1b2d, #1a2e1a);">&#127758;</div>
+      <a class="article-card animate-in" onclick="shareArticle('Ebola Outbreak Declared International Emergency')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=80" alt="Health Crisis" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
           <h3 class="card-title">Ebola Outbreak Declared International Emergency — 131 Dead</h3>
-          <p class="card-excerpt">The WHO has declared the Ebola outbreak in DR Congo an international emergency. At least 131 people have died. This outbreak involves a rare strain and is in a conflict zone, making response efforts extremely difficult. The world needs to pay attention.</p>
+          <p class="card-excerpt">The WHO has declared the Ebola outbreak in DR Congo an international emergency. At least 131 people have died. This outbreak involves a rare strain in a conflict zone.</p>
           <div class="card-footer">
-            <span>May 16, 2026 &middot; 5 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Climate Summit 2026: Bold Promises or Real Action?')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 16, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Ebola Outbreak International Emergency')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -627,39 +821,54 @@
       <a href="#" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
-      <a class="article-card" onclick="shareArticle('5 Mindset Shifts That Changed My Life')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a2e1a, #1a1a2e);">&#128161;</div>
+      <a class="article-card animate-in" onclick="shareArticle('5 Mindset Shifts That Changed My Life')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="Success Mindset" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-motivation">Motivation</span>
           <h3 class="card-title">5 Mindset Shifts That Changed My Life</h3>
-          <p class="card-excerpt">Stop chasing motivation — build systems instead. These five shifts changed everything: 1) Progress over perfection, 2) Energy management over time management, 3) Saying no to say yes, 4) Failure as data, not defeat, 5) Consistency over intensity. Each one backed by psychology and real results.</p>
+          <p class="card-excerpt">Stop chasing motivation — build systems instead. Progress over perfection, energy management over time management, saying no to say yes, failure as data, consistency over intensity.</p>
           <div class="card-footer">
-            <span>May 19, 2026 &middot; 3 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('5 Mindset Shifts That Changed My Life')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 19, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('5 Mindset Shifts')">&#128279; Share</button>
           </div>
         </div>
       </a>
-      <a class="article-card" onclick="shareArticle('The 5AM Club: Does It Actually Work?')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #2e2e1a, #1a1a2e);">&#9728;&#65039;</div>
+      <a class="article-card animate-in" onclick="shareArticle('The 5AM Club: Does It Actually Work?')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="Morning Routine" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-motivation">Motivation</span>
           <h3 class="card-title">The 5AM Club: Does It Actually Work?</h3>
-          <p class="card-excerpt">The 5AM trend has millions of followers, but does it actually boost productivity? We tested it for 30 days and tracked focus levels, output, and wellbeing. The results surprised us — it's not for everyone, but when it works, the difference is dramatic. Here's who should try it and who shouldn't.</p>
+          <p class="card-excerpt">We tested waking up at 5AM for 30 days and tracked focus levels, output, and wellbeing. The results surprised us — it's not for everyone, but when it works, the difference is dramatic.</p>
           <div class="card-footer">
-            <span>May 17, 2026 &middot; 4 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The 5AM Club: Does It Actually Work?')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 17, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The 5AM Club')">&#128279; Share</button>
           </div>
         </div>
       </a>
-      <a class="article-card" onclick="shareArticle('From Zero to Hero: Real Stories of Overcoming')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #2e1a2e);">&#127942;</div>
+      <a class="article-card animate-in" onclick="shareArticle('From Zero to Hero: Real Stories of Overcoming')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Overcoming" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-motivation">Motivation</span>
           <h3 class="card-title">From Zero to Hero: Real Stories of Overcoming</h3>
-          <p class="card-excerpt">Meet Tendai: fired at 35, built a logistics company now worth $2M. Aisha: single mother who taught herself to code and landed a remote tech job. Marcus: dropped out, got his GED at 28, now runs a community gym. Three real stories, three different paths, one common thread — refusing to quit.</p>
+          <p class="card-excerpt">Meet Tendai: fired at 35, built a logistics company worth $2M. Aisha: single mother who taught herself to code. Marcus: dropped out, got his GED at 28, now runs a community gym.</p>
           <div class="card-footer">
-            <span>May 15, 2026 &middot; 6 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('From Zero to Hero: Real Stories of Overcoming')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 15, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 6 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('From Zero to Hero')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -676,39 +885,54 @@
       <a href="#" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
-      <a class="article-card" onclick="shareArticle('Champions League Final: Preview & Prediction')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #1a2e2e);">&#9917;</div>
+      <a class="article-card animate-in" onclick="shareArticle('Champions League Final: Preview & Prediction')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" alt="Champions League" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-sports">Sports</span>
           <h3 class="card-title">Champions League Final: Preview & Prediction</h3>
-          <p class="card-excerpt">The Champions League final is set and the tension is electric. We break down both teams' road to the final, tactical matchups to watch, key players who could decide it, and the one stat that predicts the winner with 78% accuracy. Our bold call: it goes to extra time.</p>
+          <p class="card-excerpt">The Champions League final is set and the tension is electric. Tactical matchups, key players, and the one stat that predicts the winner with 78% accuracy.</p>
           <div class="card-footer">
-            <span>May 19, 2026 &middot; 5 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Champions League Final: Preview & Prediction')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 19, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Champions League Final')">&#128279; Share</button>
           </div>
         </div>
       </a>
-      <a class="article-card" onclick="shareArticle('NBA Playoffs 2026: Whos Making the Finals?')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #2e1a1a, #1a1a2e);">&#127936;</div>
+      <a class="article-card animate-in" onclick="shareArticle('NBA Playoffs 2026: Whos Making the Finals?')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1504450758481-7338bbe75005?w=600&q=80" alt="NBA Playoffs" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-sports">Sports</span>
           <h3 class="card-title">NBA Playoffs 2026: Who's Making the Finals?</h3>
-          <p class="card-excerpt">The 2026 NBA Playoffs have delivered chaos. We break down each conference matchup, the MVP candidates still in contention, and why this year's finals could be an all-time classic. Plus: the rookie nobody expected to average 25+ in the postseason.</p>
+          <p class="card-excerpt">The 2026 NBA Playoffs have delivered chaos. Each conference matchup broken down, MVP candidates, and the rookie nobody expected to average 25+ in the postseason.</p>
           <div class="card-footer">
-            <span>May 18, 2026 &middot; 4 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('NBA Playoffs 2026: Whos Making the Finals?')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 18, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('NBA Playoffs 2026')">&#128279; Share</button>
           </div>
         </div>
       </a>
-      <a class="article-card" onclick="shareArticle('The Rise of African Football on the World Stage')">
-        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a2e1a, #1a1a2e);">&#127462;&#127487;</div>
+      <a class="article-card animate-in" onclick="shareArticle('The Rise of African Football on the World Stage')">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="African Football" loading="lazy">
+        </div>
         <div class="card-body">
           <span class="card-category cat-sports">Sports</span>
           <h3 class="card-title">The Rise of African Football on the World Stage</h3>
-          <p class="card-excerpt">From Victor Osimhen to Mohammed Kudus, African players are no longer just prospects — they're leading their clubs to titles. We trace the development pipeline from Lagos to London, Accra to Amsterdam, and explore how African academies are becoming the world's best talent factories.</p>
+          <p class="card-excerpt">From Victor Osimhen to Mohammed Kudus, African players are leading their clubs to titles. The pipeline from Lagos to London is producing world-class talent at an unprecedented rate.</p>
           <div class="card-footer">
-            <span>May 16, 2026 &middot; 7 min</span>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The Rise of African Football on the World Stage')">&#128279; Share</button>
+            <div class="card-footer-left">
+              <span>May 16, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 7 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('African Football Rise')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -817,6 +1041,20 @@
         }
       });
     });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
