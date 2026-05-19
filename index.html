@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOTCOMPS — Current Affairs, Motivation, Sports & More</title>
+  <meta name="description" content="Well-researched current affairs, motivation, sports updates, and trending topics. Follow us on Facebook for daily content.">
+  <meta property="og:title" content="KOTCOMPS — Stay Informed, Stay Inspired">
+  <meta property="og:description" content="Current affairs, motivation, sports & trending topics — all in one place.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kotcomps.github.io/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a26;
+      --bg-card-hover: #22222f;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-glow: rgba(108, 92, 231, 0.3);
+      --text-primary: #e8e8f0;
+      --text-secondary: #8888a0;
+      --text-muted: #55556a;
+      --border: #2a2a3a;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --danger: #e17055;
+      --sports: #0984e3;
+      --current: #e17055;
+      --motivation: #00b894;
+      --trending: #fdcb6e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-light);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--text-primary); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-light); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, var(--accent-glow) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(0, 184, 148, 0.15) 0%, transparent 50%);
+      animation: drift 15s ease-in-out infinite;
+    }
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(1deg); }
+      66% { transform: translate(-20px, 20px) rotate(-1deg); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--accent-light);
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-light), var(--success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .section-header {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .section-header h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent-light);
+      margin-bottom: 0.5rem;
+    }
+    .view-all {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .view-all:hover { text-decoration: underline; }
+
+    /* ARTICLE GRID */
+    .articles-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .article-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .card-body { padding: 1.3rem; }
+    .card-category {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .cat-current { color: var(--current); background: rgba(225, 112, 85, 0.1); }
+    .cat-motivation { color: var(--motivation); background: rgba(0, 184, 148, 0.1); }
+    .cat-sports { color: var(--sports); background: rgba(9, 132, 227, 0.1); }
+    .cat-trending { color: var(--trending); background: rgba(253, 203, 110, 0.1); }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .card-excerpt {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .card-share {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--accent-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 500;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    .card-share:hover { color: var(--text-primary); }
+
+    /* FEATURED (large card) */
+    .featured-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 1.5rem;
+    }
+    .featured-main {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .featured-main:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .featured-main .card-img-placeholder { position: absolute; inset: 0; height: 100%; opacity: 0.3; }
+    .featured-main .card-body { position: relative; z-index: 1; background: linear-gradient(transparent, rgba(10,10,15,0.95)); padding: 2rem; }
+    .featured-main .card-title { font-size: 1.6rem; }
+    .featured-side { display: flex; flex-direction: column; gap: 1.5rem; }
+    .featured-side .article-card { flex: 1; }
+
+    /* CTA SECTION */
+    .cta-section {
+      text-align: center;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .cta-section h2 { font-size: 2rem; margin-bottom: 0.8rem; }
+    .cta-section p { color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .fb-follow-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #1877f2;
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .fb-follow-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(24, 119, 242, 0.3);
+    }
+    .fb-follow-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .stat { text-align: center; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--accent-light); }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent-light); }
+    .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1rem 2rem;
+        gap: 0.8rem;
+      }
+      .nav-links.open { display: flex; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .stats { gap: 1.5rem; }
+    }
+
+    /* SHARE MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+    .modal h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+    .modal p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .share-options { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .share-opt {
+      padding: 0.7rem 1.3rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .share-opt:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+    .modal-close {
+      margin-top: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">KOT<span>COMPS</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#current-affairs">Current Affairs</a></li>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#sports">Sports</a></li>
+        <li><a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="nav-cta">Follow on FB</a></li>
+      </ul>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Updated Daily</div>
+      <h1>Stay <span class="highlight">Informed</span>. Stay <span class="highlight">Inspired</span>.</h1>
+      <p>Well-researched current affairs, powerful motivation, live sports coverage, and trending stories — all in one place.</p>
+      <div class="hero-buttons">
+        <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Follow on Facebook
+        </a>
+        <a href="#trending" class="btn btn-outline">Read Latest</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRENDING -->
+  <section id="trending">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">What's Hot</div>
+        <h2>Trending Now</h2>
+      </div>
+      <a href="#" class="view-all">View all &rarr;</a>
+    </div>
+    <div class="featured-grid">
+      <div class="featured-main" onclick="shareArticle('Why 2026 Is the Year of Global Change')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">&#128293;</div>
+        <div class="card-body">
+          <span class="card-category cat-trending">Trending</span>
+          <h3 class="card-title">Why 2026 Is the Year of Global Change</h3>
+          <p class="card-excerpt">From shifting economies to breakthrough technologies, here's why this year is shaping up to be one of the most transformative in recent history.</p>
+          <div class="card-footer">
+            <span>May 19, 2026 &middot; 5 min read</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Why 2026 Is the Year of Global Change')">&#128279; Share</button>
+          </div>
+        </div>
+      </div>
+      <div class="featured-side">
+        <a class="article-card" onclick="shareArticle('The Secret Habit of Highly Successful People')">
+          <div class="card-body">
+            <span class="card-category cat-motivation">Motivation</span>
+            <h3 class="card-title">The Secret Habit of Highly Successful People</h3>
+            <p class="card-excerpt">It's not what you think. Research reveals the one daily practice that separates top performers from everyone else.</p>
+            <div class="card-footer">
+              <span>May 18, 2026</span>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('The Secret Habit of Highly Successful People')">&#128279; Share</button>
+            </div>
+          </div>
+        </a>
+        <a class="article-card" onclick="shareArticle('World Cup 2026: Early Predictions')">
+          <div class="card-body">
+            <span class="card-category cat-sports">Sports</span>
+            <h3 class="card-title">World Cup 2026: Early Predictions & Dark Horses</h3>
+            <p class="card-excerpt">The tournament is months away but the debate is already heated. Which teams are being underestimated?</p>
+            <div class="card-footer">
+              <span>May 17, 2026</span>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('World Cup 2026: Early Predictions')">&#128279; Share</button>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT AFFAIRS -->
+  <section id="current-affairs" style="background: var(--bg-secondary);">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Stay Updated</div>
+        <h2>Current Affairs</h2>
+      </div>
+      <a href="#" class="view-all">View all &rarr;</a>
+    </div>
+    <div class="articles-grid">
+      <a class="article-card" onclick="shareArticle('Global Elections 2026: What You Need to Know')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #2d1b1b, #1a1a2e);">&#127919;</div>
+        <div class="card-body">
+          <span class="card-category cat-current">Current Affairs</span>
+          <h3 class="card-title">Global Elections 2026: What You Need to Know</h3>
+          <p class="card-excerpt">Over 60 countries head to the polls this year. Here's a breakdown of the elections that could reshape the world order.</p>
+          <div class="card-footer">
+            <span>May 18, 2026 &middot; 4 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global Elections 2026: What You Need to Know')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card" onclick="shareArticle('AI Regulation: The New Rules Changing Everything')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1b2d1b, #1a1a2e);">&#129302;</div>
+        <div class="card-body">
+          <span class="card-category cat-current">Current Affairs</span>
+          <h3 class="card-title">AI Regulation: The New Rules Changing Everything</h3>
+          <p class="card-excerpt">Governments worldwide are racing to regulate artificial intelligence. Here's how it affects you and the tech you use daily.</p>
+          <div class="card-footer">
+            <span>May 17, 2026 &middot; 6 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('AI Regulation: The New Rules Changing Everything')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card" onclick="shareArticle('Climate Summit 2026: Bold Promises or Real Action?')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1b1b2d, #1a2e1a);">&#127758;</div>
+        <div class="card-body">
+          <span class="card-category cat-current">Current Affairs</span>
+          <h3 class="card-title">Climate Summit 2026: Bold Promises or Real Action?</h3>
+          <p class="card-excerpt">World leaders convene again for climate talks. We break down what's actually on the table versus what's just talk.</p>
+          <div class="card-footer">
+            <span>May 16, 2026 &middot; 5 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Climate Summit 2026: Bold Promises or Real Action?')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- MOTIVATION -->
+  <section id="motivation">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Level Up</div>
+        <h2>Motivation</h2>
+      </div>
+      <a href="#" class="view-all">View all &rarr;</a>
+    </div>
+    <div class="articles-grid">
+      <a class="article-card" onclick="shareArticle('5 Mindset Shifts That Changed My Life')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a2e1a, #1a1a2e);">&#128161;</div>
+        <div class="card-body">
+          <span class="card-category cat-motivation">Motivation</span>
+          <h3 class="card-title">5 Mindset Shifts That Changed My Life</h3>
+          <p class="card-excerpt">Small changes in thinking that led to massive results. Number 3 alone is worth the read.</p>
+          <div class="card-footer">
+            <span>May 19, 2026 &middot; 3 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('5 Mindset Shifts That Changed My Life')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card" onclick="shareArticle('The 5AM Club: Does It Actually Work?')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #2e2e1a, #1a1a2e);">&#9728;&#65039;</div>
+        <div class="card-body">
+          <span class="card-category cat-motivation">Motivation</span>
+          <h3 class="card-title">The 5AM Club: Does It Actually Work?</h3>
+          <p class="card-excerpt">We tried waking up at 5AM for 30 days straight. Here's the honest truth about what happened.</p>
+          <div class="card-footer">
+            <span>May 17, 2026 &middot; 4 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The 5AM Club: Does It Actually Work?')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card" onclick="shareArticle('From Zero to Hero: Real Stories of Overcoming')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #2e1a2e);">&#127942;</div>
+        <div class="card-body">
+          <span class="card-category cat-motivation">Motivation</span>
+          <h3 class="card-title">From Zero to Hero: Real Stories of Overcoming</h3>
+          <p class="card-excerpt">Three ordinary people who turned their lives around against all odds. Their stories will inspire your next move.</p>
+          <div class="card-footer">
+            <span>May 15, 2026 &middot; 6 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('From Zero to Hero: Real Stories of Overcoming')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SPORTS -->
+  <section id="sports" style="background: var(--bg-secondary);">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Game On</div>
+        <h2>Sports</h2>
+      </div>
+      <a href="#" class="view-all">View all &rarr;</a>
+    </div>
+    <div class="articles-grid">
+      <a class="article-card" onclick="shareArticle('Champions League Final: Preview & Prediction')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #1a2e2e);">&#9917;</div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Champions League Final: Preview & Prediction</h3>
+          <p class="card-excerpt">The biggest club match of the year is here. Tactics, key players, and our bold prediction.</p>
+          <div class="card-footer">
+            <span>May 19, 2026 &middot; 5 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Champions League Final: Preview & Prediction')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card" onclick="shareArticle('NBA Playoffs 2026: Whos Making the Finals?')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #2e1a1a, #1a1a2e);">&#127936;</div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">NBA Playoffs 2026: Who's Making the Finals?</h3>
+          <p class="card-excerpt">Breaking down the matchups, the upsets, and the teams poised to make a deep run this postseason.</p>
+          <div class="card-footer">
+            <span>May 18, 2026 &middot; 4 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('NBA Playoffs 2026: Whos Making the Finals?')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card" onclick="shareArticle('The Rise of African Football on the World Stage')">
+        <div class="card-img-placeholder" style="background: linear-gradient(135deg, #1a2e1a, #1a1a2e);">&#127462;&#127487;</div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">The Rise of African Football on the World Stage</h3>
+          <p class="card-excerpt">African talent is dominating European leagues. We explore the pipeline, the stars, and what it means for the beautiful game.</p>
+          <div class="card-footer">
+            <span>May 16, 2026 &middot; 7 min</span>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The Rise of African Football on the World Stage')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Don't Miss a Story</h2>
+    <p>Follow KOTCOMPS on Facebook for daily updates, breaking news, and content that keeps you ahead.</p>
+    <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="fb-follow-btn">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Follow KOTCOMPS on Facebook
+    </a>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">Daily</div>
+        <div class="stat-label">Fresh Content</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Free</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="#trending">Trending</a>
+      <a href="#current-affairs">Current Affairs</a>
+      <a href="#motivation">Motivation</a>
+      <a href="#sports">Sports</a>
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 KOTCOMPS. All rights reserved.</p>
+  </footer>
+
+  <!-- SHARE MODAL -->
+  <div class="modal-overlay" id="shareModal">
+    <div class="modal">
+      <h3>Share This Article</h3>
+      <p id="shareTitle"></p>
+      <div class="share-options">
+        <button class="share-opt" onclick="shareToFacebook()">Facebook</button>
+        <button class="share-opt" onclick="shareToTwitter()">Twitter / X</button>
+        <button class="share-opt" onclick="shareToWhatsApp()">WhatsApp</button>
+        <button class="share-opt" onclick="copyLink()">Copy Link</button>
+      </div>
+      <button class="modal-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const PAGE_URL = 'https://www.facebook.com/KOTCOMPS/';
+    let currentArticle = '';
+
+    function shareArticle(title) {
+      currentArticle = title;
+      document.getElementById('shareTitle').textContent = title;
+      document.getElementById('shareModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('shareModal').classList.remove('active');
+    }
+
+    document.getElementById('shareModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    function shareToFacebook() {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(PAGE_URL)}&quote=${encodeURIComponent(currentArticle)}`, '_blank', 'width=600,height=400');
+      closeModal();
+    }
+
+    function shareToTwitter() {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(currentArticle + ' | KOTCOMPS')}&url=${encodeURIComponent(PAGE_URL)}`, '_blank', 'width=600,height=400');
+      closeModal();
+    }
+
+    function shareToWhatsApp() {
+      window.open(`https://wa.me/?text=${encodeURIComponent(currentArticle + ' - ' + PAGE_URL)}`, '_blank');
+      closeModal();
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(PAGE_URL).then(() => {
+        alert('Link copied!');
+      });
+      closeModal();
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById('navLinks').classList.remove('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
