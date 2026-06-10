@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOTCOMPS Spin the Wheel — Daily Luck & Motivation</title>
+  <meta name="description" content="Spin the Wheel of Motivation & Luck to receive your daily message, and share it on Facebook!">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kotcomps.github.io/spin.html">
+  <meta property="og:title" content="What does the KOTCOMPS Wheel of Fortune predict for you today?">
+  <meta property="og:description" content="Spin the glowing wheel of motivation and sports predictions. Share your result and challenge your friends on Facebook!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80">
+  <meta property="og:site_name" content="KOTCOMPS">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236c5ce7'/><text x='50' y='72' font-size='60' font-weight='800' text-anchor='middle' fill='white'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .game-page {
+      padding-top: 100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg-primary);
+    }
+    .game-container {
+      max-width: 600px;
+      width: 90%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .wheel-container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin-bottom: 2rem;
+    }
+    #wheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(108, 92, 231, 0.4), 0 0 0 6px var(--border);
+    }
+    .wheel-pointer {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 25px solid #e17055;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      z-index: 10;
+    }
+    .spin-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px var(--accent-glow);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .spin-btn:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 12px 35px var(--accent-glow);
+    }
+    .spin-btn:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    .result-card {
+      margin-top: 2rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      width: 100%;
+      display: none;
+      animation: fadeInUp 0.4s ease-out;
+    }
+    .result-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-light);
+      margin-bottom: 0.5rem;
+    }
+    .result-text {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .fb-action-box {
+      background: linear-gradient(135deg, rgba(24, 119, 242, 0.12) 0%, rgba(108, 92, 231, 0.05) 100%);
+      border: 1px solid rgba(24, 119, 242, 0.3);
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-top: 2rem;
+      text-align: center;
+      width: 100%;
+    }
+    .fb-action-box h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+    .fb-action-box p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+    .stars-prompt {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--warning);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body class="game-page">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">KOT<span>COMPS</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#trending">Trending</a></li>
+        <li><a href="index.html#current-affairs">Current Affairs</a></li>
+        <li><a href="index.html#motivation">Motivation</a></li>
+        <li><a href="index.html#sports">Sports</a></li>
+        <li><a href="spin.html" class="nav-cta" style="background: var(--accent) !important;">Spin Wheel</a></li>
+      </ul>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- WHEEL INTERFACE -->
+  <div class="game-container">
+    <div class="question-num" style="margin-bottom: 1rem;">Daily Fortune & Inspiration</div>
+    <h2 style="font-weight: 800; font-size: 1.6rem; margin-bottom: 2rem;">Spin the KOTCOMPS Wheel</h2>
+    
+    <div class="wheel-container">
+      <div class="wheel-pointer"></div>
+      <canvas id="wheelCanvas" width="500" height="500"></canvas>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">SPIN NOW</button>
+
+    <!-- Result display -->
+    <div class="result-card" id="resultCard">
+      <div class="result-label">Your Daily Oracle</div>
+      <div class="result-text" id="resultText">Loading...</div>
+      
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <button class="btn btn-primary" onclick="shareResult()" style="width: 100%; justify-content: center; gap: 0.5rem; background: #1877f2;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.2rem;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Share & Post Result on Facebook
+        </button>
+        <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;">
+          👍 Like Page & Keep Spinning
+        </a>
+      </div>
+    </div>
+
+    <!-- FB Drive Box -->
+    <div class="fb-action-box">
+      <h4>⭐️ Support KOTCOMPS on FB!</h4>
+      <p>Did the wheel give you a good prediction? **Like, Repost, and send Stars** on our Facebook page to share the luck with others!</p>
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;">
+        Like & Send Stars on FB
+      </a>
+      <div class="stars-prompt">✨ Send 50 Stars = 3x Luck Multiplier!</div>
+    </div>
+  </div>
+
+  <!-- FLOATING FB BANNER -->
+  <div class="floating-fb-banner" id="floatingFbBanner">
+    <div class="floating-fb-banner-text">
+      <div class="floating-fb-banner-title">Love Spin Wheel & News?</div>
+      <div class="floating-fb-banner-desc">Follow KOTCOMPS on Facebook for daily updates!</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" class="floating-fb-btn">Follow</a>
+      <button class="floating-fb-close" onclick="closeFbBanner()">&times;</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="width: 100%; margin-top: auto;">
+    <div class="footer-links">
+      <a href="index.html#trending">Trending</a>
+      <a href="index.html#current-affairs">Current Affairs</a>
+      <a href="index.html#motivation">Motivation</a>
+      <a href="index.html#sports">Sports</a>
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 KOTCOMPS. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const options = [
+      "🔥 Spurs will win the NBA Finals this year!",
+      "⚡️ Expect a huge global breakthrough in AGI this week.",
+      "🚀 Focus on systems over motivation — build a routine today!",
+      "🌟 Your consistency will compound into massive success soon.",
+      "⚽️ Victor Osimhen will score a hat-trick in his next game!",
+      "💼 Standard Chartered job cuts prove: learn AI skills now!",
+      "❤️ 'Your worst day is someone else's dream.' Stay grateful today.",
+      "🏆 Champions League Final Prediction: A historic 2-1 thriller!"
+    ];
+
+    const colors = [
+      "#6c5ce7", "#8e44ad", "#2980b9", "#27ae60",
+      "#f1c40f", "#e67e22", "#d35400", "#c0392b"
+    ];
+
+    const canvas = document.getElementById("wheelCanvas");
+    const ctx = canvas.getContext("2d");
+    const spinBtn = document.getElementById("spinBtn");
+    const resultCard = document.getElementById("resultCard");
+    const resultText = document.getElementById("resultText");
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const center = width / 2;
+    const numSlices = options.length;
+    const sliceAngle = (2 * Math.PI) / numSlices;
+    
+    let currentRotation = 0;
+    let isSpinning = false;
+    let winningIndex = null;
+
+    // Draw static wheel initially
+    drawWheel();
+
+    function playSound(type) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'tick') {
+          osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.04);
+        } else if (type === 'win') {
+          osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+          osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+          osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.3); // C6
+          gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.6);
+        }
+      } catch (e) {
+        // Audio policy blocks or unsupported
+      }
+    }
+
+    function drawWheel() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Slices
+      for (let i = 0; i < numSlices; i++) {
+        const angle = currentRotation + i * sliceAngle;
+        
+        ctx.beginPath();
+        ctx.fillStyle = colors[i];
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, center - 15, angle, angle + sliceAngle);
+        ctx.lineTo(center, center);
+        ctx.fill();
+
+        // Slice Text
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate(angle + sliceAngle / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 14px Inter, sans-serif";
+        
+        // Truncate text if too long
+        let text = options[i];
+        if (text.length > 28) text = text.substring(0, 26) + "...";
+        ctx.fillText(text, center - 30, 5);
+        ctx.restore();
+      }
+
+      // Outer rim
+      ctx.beginPath();
+      ctx.arc(center, center, center - 15, 0, 2 * Math.PI);
+      ctx.strokeStyle = "#1e1e30";
+      ctx.lineWidth = 12;
+      ctx.stroke();
+
+      // Inner bulb
+      ctx.beginPath();
+      ctx.arc(center, center, 35, 0, 2 * Math.PI);
+      ctx.fillStyle = "#14141e";
+      ctx.strokeStyle = "#6c5ce7";
+      ctx.lineWidth = 4;
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    function spinWheel() {
+      if (isSpinning) return;
+
+      isSpinning = true;
+      spinBtn.disabled = true;
+      resultCard.style.display = "none";
+
+      const spinDuration = 4000; // 4 seconds
+      const startTime = performance.now();
+      const initialRotation = currentRotation;
+      
+      // Target a random angle with at least 5 full rotations
+      const targetRotationOffset = 5 * 2 * Math.PI + Math.random() * 2 * Math.PI;
+      const targetRotation = initialRotation + targetRotationOffset;
+
+      let lastTickAngle = 0;
+
+      function animateSpin(currentTime) {
+        const elapsedTime = currentTime - startTime;
+
+        if (elapsedTime >= spinDuration) {
+          currentRotation = targetRotation % (2 * Math.PI);
+          drawWheel();
+          isSpinning = false;
+          spinBtn.disabled = false;
+          
+          // Calculate winning index (pointer is at the top: -Math.PI / 2)
+          const pointerAngle = -Math.PI / 2;
+          // Normalize winning angle
+          let angleRelative = (pointerAngle - currentRotation) % (2 * Math.PI);
+          if (angleRelative < 0) angleRelative += 2 * Math.PI;
+          
+          winningIndex = Math.floor(angleRelative / sliceAngle) % numSlices;
+          showResult();
+          return;
+        }
+
+        // Cubic Easing out for natural stopping feel
+        const progress = elapsedTime / spinDuration;
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        currentRotation = initialRotation + easeOut * targetRotationOffset;
+
+        // Sound Ticking logic
+        const currentTickAngle = Math.floor(currentRotation / (sliceAngle / 2));
+        if (currentTickAngle !== lastTickAngle) {
+          playSound('tick');
+          lastTickAngle = currentTickAngle;
+        }
+
+        drawWheel();
+        requestAnimationFrame(animateSpin);
+      }
+
+      requestAnimationFrame(animateSpin);
+    }
+
+    function showResult() {
+      playSound('win');
+      resultCard.style.display = "block";
+      resultText.textContent = options[winningIndex];
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function shareResult() {
+      const shareUrl = 'https://kotcomps.github.io/spin.html';
+      const text = `I spun the KOTCOMPS Fortune Wheel and got: "${options[winningIndex]}"! Try your luck and get inspired:`;
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
+    }
+
+    // Floating FB Banner logic
+    setTimeout(() => {
+      document.getElementById('floatingFbBanner').classList.add('show');
+    }, 3000);
+
+    function closeFbBanner() {
+      document.getElementById('floatingFbBanner').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

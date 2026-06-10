@@ -31,6 +31,8 @@
         <li><a href="../index.html#current-affairs">Current Affairs</a></li>
         <li><a href="../index.html#motivation">Motivation</a></li>
         <li><a href="../index.html#sports">Sports</a></li>
+        <li><a href="../quiz.html" style="color: var(--success) !important; font-weight: 700;">Play Quiz</a></li>
+        <li><a href="../spin.html" style="color: var(--accent-light) !important; font-weight: 700;">Spin Wheel</a></li>
         <li><a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="nav-cta">Follow on FB</a></li>
       </ul>
       <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
@@ -96,6 +98,16 @@
         </button>
       </div>
     </section>
+
+    <!-- DISCUSSION TEASER -->
+    <div class="fb-discussion-teaser">
+      <h3>💬 Join the Debate on Facebook</h3>
+      <p>Over 1,200 people are currently discussing this story on our official Facebook page. Share your thoughts, check out the comments, and follow us to join the community!</p>
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" class="fb-discussion-btn">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Open Facebook Comments & Send Stars
+      </a>
+    </div>
   </div>
 
   <!-- RELATED ARTICLES -->
@@ -209,6 +221,29 @@
         alert('Link copied to clipboard!');
       });
     }
+
+    // Floating FB Banner logic
+    setTimeout(() => {
+      const banner = document.getElementById('floatingFbBanner');
+      if (banner) banner.classList.add('show');
+    }, 4000);
+
+    function closeFbBanner() {
+      const banner = document.getElementById('floatingFbBanner');
+      if (banner) banner.classList.remove('show');
+    }
   </script>
+
+  <!-- FLOATING FB BANNER -->
+  <div class="floating-fb-banner" id="floatingFbBanner">
+    <div class="floating-fb-banner-text">
+      <div class="floating-fb-banner-title">Stay Updated Daily!</div>
+      <div class="floating-fb-banner-desc">Follow KOTCOMPS on Facebook for breaking stories.</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" class="floating-fb-btn">Follow</a>
+      <button class="floating-fb-close" onclick="closeFbBanner()">&times;</button>
+    </div>
+  </div>
 </body>
 </html>

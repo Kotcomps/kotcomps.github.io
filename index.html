@@ -20,12 +20,14 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="logo">KOT<span>COMPS</span></a>
+      <a href="index.html" class="logo">KOT<span>COMPS</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#trending">Trending</a></li>
-        <li><a href="#current-affairs">Current Affairs</a></li>
-        <li><a href="#motivation">Motivation</a></li>
-        <li><a href="#sports">Sports</a></li>
+        <li><a href="index.html#trending">Trending</a></li>
+        <li><a href="index.html#current-affairs">Current Affairs</a></li>
+        <li><a href="index.html#motivation">Motivation</a></li>
+        <li><a href="index.html#sports">Sports</a></li>
+        <li><a href="quiz.html" style="color: var(--success) !important; font-weight: 700;">Play Quiz</a></li>
+        <li><a href="spin.html" style="color: var(--accent-light) !important; font-weight: 700;">Spin Wheel</a></li>
         <li><a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="nav-cta">Follow on FB</a></li>
       </ul>
       <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
@@ -47,8 +49,54 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           Follow on Facebook
         </a>
-        <a href="#trending" class="btn btn-outline">Read Latest</a>
+        <a href="#games-section" class="btn btn-outline">Play Games & Quizzes</a>
       </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE GAMES SECTION -->
+  <section id="games-section" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 4rem 2rem;">
+    <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem; flex-direction: column; align-items: center; justify-content: center;">
+      <div class="section-tag" style="text-align: center;">Play & Share</div>
+      <h2 style="font-size: 2.2rem; font-weight: 800; text-align: center;">Interactive Challenges</h2>
+      <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1rem; text-align: center;">Test your knowledge, get your daily fortune, and challenge your friends on Facebook!</p>
+    </div>
+    <div class="articles-grid" style="max-width: 900px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      
+      <!-- Quiz Card -->
+      <a href="quiz.html" class="article-card animate-in" style="border-color: rgba(0, 184, 148, 0.25);">
+        <div class="card-img-wrap" style="height: 180px;">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Quiz Challenge" loading="lazy">
+          <span class="badge-latest" style="background: var(--success);">Interactive</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-motivation" style="color: var(--success); background: rgba(0, 184, 148, 0.12);">KOTCOMPS Trivia</span>
+          <h3 class="card-title">Ultimate Trivia Quiz Challenge</h3>
+          <p class="card-excerpt">How well do you know current affairs, trending news, and sports? Take our 5-question test, get your custom badge, and post your high score on Facebook!</p>
+          <div class="card-footer" style="margin-top: 1.5rem;">
+            <span style="font-weight: 600; color: var(--success);">Play Now &rarr;</span>
+            <span style="color: var(--text-muted);">⏱ 3 min play</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Spin Wheel Card -->
+      <a href="spin.html" class="article-card animate-in" style="border-color: rgba(108, 92, 231, 0.25);">
+        <div class="card-img-wrap" style="height: 180px;">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="Spin the Wheel" loading="lazy">
+          <span class="badge-latest">Virtual Game</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-sports" style="color: var(--accent-light); background: rgba(108, 92, 231, 0.12);">Lucky Wheel</span>
+          <h3 class="card-title">Spin the Wheel of Fortune</h3>
+          <p class="card-excerpt">Get your daily motivational quote or sports prediction from the KOTCOMPS wheel. Spin the wheel, discover your fortune, and share the luck on Facebook!</p>
+          <div class="card-footer" style="margin-top: 1.5rem;">
+            <span style="font-weight: 600; color: var(--accent-light);">Spin Wheel &rarr;</span>
+            <span style="color: var(--text-muted);">🎉 Instant result</span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </section>
 
@@ -427,6 +475,29 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+    // Floating FB Banner logic
+    setTimeout(() => {
+      const banner = document.getElementById('floatingFbBanner');
+      if (banner) banner.classList.add('show');
+    }, 4000);
+
+    function closeFbBanner() {
+      const banner = document.getElementById('floatingFbBanner');
+      if (banner) banner.classList.remove('show');
+    }
   </script>
+
+  <!-- FLOATING FB BANNER -->
+  <div class="floating-fb-banner" id="floatingFbBanner">
+    <div class="floating-fb-banner-text">
+      <div class="floating-fb-banner-title">Stay Updated Daily!</div>
+      <div class="floating-fb-banner-desc">Follow KOTCOMPS on Facebook for breaking stories.</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" class="floating-fb-btn">Follow</a>
+      <button class="floating-fb-close" onclick="closeFbBanner()">&times;</button>
+    </div>
+  </div>
 </body>
 </html>
