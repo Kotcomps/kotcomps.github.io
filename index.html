@@ -383,6 +383,21 @@
     </div>
   </section>
 
+  <!-- NEWSLETTER SECTION -->
+  <section id="newsletter" style="background: var(--bg-primary); border-top: 1px solid var(--border); padding: 5rem 2rem; position: relative;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center; z-index: 2; position: relative;">
+      <div class="section-tag">Stay Informed</div>
+      <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;">Subscribe to our Newsletter</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.05rem;">Get the latest current affairs, motivation, and sports updates delivered straight to your inbox daily.</p>
+      <form id="newsletterForm" style="display: flex; gap: 0.75rem; max-width: 500px; margin: 0 auto; flex-wrap: wrap;" onsubmit="handleSubscribe(event)">
+        <input type="email" id="emailInput" placeholder="Enter your email address" required style="flex: 1; min-width: 250px; background: var(--bg-secondary); border: 1px solid var(--border); padding: 0.95rem 1.5rem; border-radius: 12px; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.25s, box-shadow 0.25s;">
+        <button type="submit" class="btn btn-primary" style="padding: 0.95rem 2rem;">Subscribe</button>
+      </form>
+      <div id="subscriptionMessage" style="margin-top: 1rem; font-size: 0.95rem; font-weight: 600; display: none; transition: all 0.3s;"></div>
+    </div>
+    <div style="position: absolute; bottom: 0; right: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(108, 92, 231, 0.05) 0%, transparent 60%); pointer-events: none; z-index: 1;"></div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-links">
@@ -485,6 +500,28 @@
     function closeFbBanner() {
       const banner = document.getElementById('floatingFbBanner');
       if (banner) banner.classList.remove('show');
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value;
+      const msg = document.getElementById('subscriptionMessage');
+      
+      let subscribers = JSON.parse(localStorage.getItem('subscribers') || '[]');
+      if (subscribers.includes(email)) {
+        msg.textContent = 'You are already subscribed!';
+        msg.style.color = 'var(--warning)';
+      } else {
+        subscribers.push(email);
+        localStorage.setItem('subscribers', JSON.stringify(subscribers));
+        msg.textContent = 'Thank you for subscribing!';
+        msg.style.color = 'var(--success)';
+        document.getElementById('emailInput').value = '';
+      }
+      msg.style.display = 'block';
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 5000);
     }
   </script>
 
