@@ -961,3 +961,185 @@
   border-color: var(--accent) !important;
   box-shadow: 0 0 15px var(--accent-glow) !important;
 }
+
+/* SEARCH & FILTER STYLES */
+.search-section {
+  padding: 2.5rem 2rem 1.5rem;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+}
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.search-input-wrap {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+.search-input-wrap input {
+  width: 100%;
+  padding: 1.1rem 1.5rem 1.1rem 3.2rem;
+  font-size: 1.05rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.search-input-wrap input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 25px var(--accent-glow);
+  background: var(--bg-card-hover);
+}
+.search-input-wrap svg {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.search-filter-pills {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.filter-pill {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-pill:hover, .filter-pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* POLL OF THE DAY STYLES */
+.poll-section {
+  padding: 4rem 2rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.poll-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.poll-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+}
+.poll-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+.poll-option-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.4rem;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  text-align: left;
+}
+.poll-option-btn:hover {
+  border-color: var(--accent-light);
+  transform: translateX(4px);
+  background: var(--bg-card-hover);
+}
+.poll-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: rgba(108, 92, 231, 0.25);
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+.poll-pct {
+  font-weight: 700;
+  color: var(--accent-light);
+  font-size: 0.95rem;
+}
+
+/* NEWSLETTER SECTION STYLES */
+.newsletter-section {
+  padding: 4.5rem 2rem;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+.newsletter-card {
+  max-width: 850px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.15) 0%, rgba(0, 184, 148, 0.08) 100%);
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  border-radius: 24px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.newsletter-form {
+  display: flex;
+  gap: 0.8rem;
+  max-width: 540px;
+  margin: 2rem auto 0;
+  flex-wrap: wrap;
+}
+.newsletter-form input {
+  flex: 1;
+  min-width: 260px;
+  padding: 1rem 1.4rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: rgba(14, 14, 22, 0.9);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+.newsletter-form button {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent) 0%, #a29bfe 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+.newsletter-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
+}

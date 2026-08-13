@@ -54,6 +54,23 @@
     </div>
   </section>
 
+  <!-- INSTANT SEARCH & FILTER -->
+  <section class="search-section" id="search-section">
+    <div class="search-container">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="articleSearchInput" placeholder="Search articles by title, topic, or keyword (e.g. AI, Wembanyama, Habits)..." onkeyup="filterArticles()">
+      </div>
+      <div class="search-filter-pills">
+        <button class="filter-pill active" onclick="setFilter('all', this)">All Stories</button>
+        <button class="filter-pill" onclick="setFilter('trending', this)">🔥 Trending</button>
+        <button class="filter-pill" onclick="setFilter('current-affairs', this)">🌍 Current Affairs</button>
+        <button class="filter-pill" onclick="setFilter('motivation', this)">💡 Motivation</button>
+        <button class="filter-pill" onclick="setFilter('sports', this)">⚽ Sports</button>
+      </div>
+    </div>
+  </section>
+
   <!-- INTERACTIVE GAMES SECTION -->
   <section id="games-section" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 4rem 2rem;">
     <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem; flex-direction: column; align-items: center; justify-content: center;">
@@ -100,6 +117,43 @@
     </div>
   </section>
 
+  <!-- POLL OF THE DAY SECTION -->
+  <section class="poll-section" id="daily-poll">
+    <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 2.5rem; flex-direction: column; align-items: center;">
+      <div class="section-tag">Community Vote</div>
+      <h2>Poll of the Day</h2>
+      <p style="color: var(--text-secondary); margin-top: 0.4rem;">Vote and instantly view community results!</p>
+    </div>
+    <div class="poll-card animate-in">
+      <h3 id="pollQuestion" style="font-size: 1.3rem; font-weight: 700; text-align: center;">What will be the most defining breakthrough of 2026?</h3>
+      <div class="poll-options" id="pollOptions">
+        <button class="poll-option-btn" onclick="votePoll(0)">
+          <div class="poll-bar-fill" id="pollBar0"></div>
+          <span style="position: relative; z-index: 2;">🤖 Autonomous AI Superintelligence Accord</span>
+          <span class="poll-pct" id="pollPct0" style="position: relative; z-index: 2;">--</span>
+        </button>
+        <button class="poll-option-btn" onclick="votePoll(1)">
+          <div class="poll-bar-fill" id="pollBar1"></div>
+          <span style="position: relative; z-index: 2;">⚽ 2026 FIFA World Cup Drama</span>
+          <span class="poll-pct" id="pollPct1" style="position: relative; z-index: 2;">--</span>
+        </button>
+        <button class="poll-option-btn" onclick="votePoll(2)">
+          <div class="poll-bar-fill" id="pollBar2"></div>
+          <span style="position: relative; z-index: 2;">💡 Micro-Habits & Mindset Systems</span>
+          <span class="poll-pct" id="pollPct2" style="position: relative; z-index: 2;">--</span>
+        </button>
+        <button class="poll-option-btn" onclick="votePoll(3)">
+          <div class="poll-bar-fill" id="pollBar3"></div>
+          <span style="position: relative; z-index: 2;">🚀 Next-Gen Space Exploration & Tech</span>
+          <span class="poll-pct" id="pollPct3" style="position: relative; z-index: 2;">--</span>
+        </button>
+      </div>
+      <div id="pollStatusMsg" style="text-align: center; margin-top: 1.2rem; font-size: 0.88rem; color: var(--text-muted);">
+        Click any option to cast your vote!
+      </div>
+    </div>
+  </section>
+
   <!-- TRENDING -->
   <section id="trending">
     <div class="section-header">
@@ -107,59 +161,59 @@
         <div class="section-tag">What's Hot</div>
         <h2>Trending Now</h2>
       </div>
-      <a href="#" class="view-all">View all &rarr;</a>
+      <a href="#trending" class="view-all">View all &rarr;</a>
     </div>
     <div class="featured-grid">
-      <div class="featured-main animate-in" onclick="window.location.href='articles/wimbledon-2026.html'">
+      <div class="featured-main animate-in" onclick="window.location.href='articles/ai-superintelligence-2026-summit.html'">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=900&q=80" alt="Basketball" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&q=80" alt="AI Summit" loading="lazy">
           <span class="badge-latest">Latest</span>
         </div>
         <div class="card-body">
           <span class="card-category cat-trending">Trending</span>
-          <h3 class="card-title">Wimbledon 2026: Alcaraz and Swiatek Storm Into Round of 16 With Dominant Wins</h3>
-          <p class="card-excerpt">Defending champion Carlos Alcaraz and world No. 1 Iga Swiatek both secured straight-sets victories to march into the fourth round at Wimbledon, as sunny skies finally returned to London.</p>
+          <h3 class="card-title">Global AI Summit 2026: 40 Nations Sign Historic Safety Accord</h3>
+          <p class="card-excerpt">World leaders and tech visionaries sign the Geneva Accord on Autonomous AI Governance, setting strict safety protocols as frontier models surpass human-level benchmarks.</p>
           <div class="card-footer">
             <div class="card-footer-left">
-              <span>July 1, 2026</span>
+              <span>August 13, 2026</span>
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
             </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Wimbledon 2026: Alcaraz and Swiatek Storm Into Round of 16 With Dominant Wins')">&#128279; Share</button>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global AI Summit 2026: 40 Nations Sign Historic Safety Accord')">&#128279; Share</button>
           </div>
         </div>
       </div>
       <div class="featured-side">
-        <a class="article-card animate-in" href="articles/fifa-world-cup-2026.html">
+        <a class="article-card animate-in" href="articles/habs-nhl-playoffs-miracle.html">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="Football" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=600&q=80" alt="Hockey Miracle" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-category cat-sports">Sports</span>
-            <h3 class="card-title">2026 FIFA World Cup: Spain Edges Brazil 2-1 in Historic Quarterfinal</h3>
-            <p class="card-excerpt">Spain secured a spot in the semifinals after a dramatic 92nd-minute winner against Brazil in a packed stadium in Miami, keeping their World Cup dream alive.</p>
+            <h3 class="card-title">Montreal Canadiens Complete Game 7 OT Miracle to Reach Conference Finals</h3>
+            <p class="card-excerpt">Alex Newhook's overtime winner caps a miraculous Game 7 comeback for the Habs against Buffalo, sending Montreal fans into hysteria.</p>
             <div class="card-footer">
               <div class="card-footer-left">
-                <span>June 30, 2026</span>
+                <span>August 13, 2026</span>
                 <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
               </div>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('2026 FIFA World Cup: Spain Edges Brazil 2-1 in Historic Quarterfinal')">&#128279; Share</button>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Montreal Canadiens Complete Game 7 OT Miracle')">&#128279; Share</button>
             </div>
           </div>
         </a>
-        <a class="article-card animate-in" href="articles/us-iran-doha-talks.html">
+        <a class="article-card animate-in" href="articles/champions-league-2026-upsets.html">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" alt="World Politics" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="Champions League" loading="lazy">
           </div>
           <div class="card-body">
-            <span class="card-category cat-current">Current Affairs</span>
-            <h3 class="card-title">Doha Negotiations: US and Iran Edge Closer to Regional De-escalation Framework</h3>
-            <p class="card-excerpt">Negotiators in Qatar report significant progress on a preliminary deal concerning trade sanctions and security in the Strait of Hormuz, raising hopes for a diplomatic breakthrough.</p>
+            <span class="card-category cat-sports">Sports</span>
+            <h3 class="card-title">Champions League: Real Sociedad Stuns Bayern Munich in 3-2 Comeback</h3>
+            <p class="card-excerpt">An unforgettable European night in San Sebastián as Sociedad overturns a two-goal deficit with a 94th-minute winner.</p>
             <div class="card-footer">
               <div class="card-footer-left">
-                <span>July 1, 2026</span>
-                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3 min</span>
+                <span>August 13, 2026</span>
+                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
               </div>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Doha Negotiations: US and Iran Edge Closer to Regional De-escalation Framework')">&#128279; Share</button>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Champions League: Real Sociedad Stuns Bayern Munich')">&#128279; Share</button>
             </div>
           </div>
         </a>
@@ -174,57 +228,57 @@
         <div class="section-tag">Stay Updated</div>
         <h2>Current Affairs</h2>
       </div>
-      <a href="#" class="view-all">View all &rarr;</a>
+      <a href="#current-affairs" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
-      <a class="article-card animate-in" href="articles/russia-fuel-rationing.html">
+      <a class="article-card animate-in" href="articles/ai-superintelligence-2026-summit.html">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80" alt="Elections" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="AI Summit" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
-          <h3 class="card-title">Russia's Fuel Crisis Deepens: Rationing Implemented After Refinery Drone Strikes</h3>
-          <p class="card-excerpt">Domestic fuel rationing has been introduced in several regions across Russia as refining capacity drops following successful Ukrainian drone strikes on key facilities.</p>
+          <h3 class="card-title">Global AI Summit 2026: 40 Nations Sign Historic Safety Accord</h3>
+          <p class="card-excerpt">World leaders and tech visionaries sign the Geneva Accord on Autonomous AI Governance, setting strict safety protocols as frontier models advance.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>August 13, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global AI Summit 2026: 40 Nations Sign Historic Safety Accord')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card animate-in" href="articles/russia-fuel-rationing.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80" alt="Fuel Crisis" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-current">Current Affairs</span>
+          <h3 class="card-title">Russia's Fuel Crisis Deepens: Rationing Implemented After Drone Strikes</h3>
+          <p class="card-excerpt">Domestic fuel rationing has been introduced in several regions across Russia as refining capacity drops following drone strikes on key facilities.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>June 30, 2026</span>
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
             </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Russia's Fuel Crisis Deepens: Rationing Implemented After Refinery Drone Strikes')">&#128279; Share</button>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Russia Fuel Crisis')">&#128279; Share</button>
           </div>
         </div>
       </a>
       <a class="article-card animate-in" href="articles/europe-heatwave-action-plan.html">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1504370805625-d32c54b16100?w=600&q=80" alt="AI Technology" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1504370805625-d32c54b16100?w=600&q=80" alt="Heatwave Plan" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
-          <h3 class="card-title">Europe's Historic Heatwave: Mediterranean Countries Launch First Joint Climate Action Plan</h3>
-          <p class="card-excerpt">As temperatures soar past 42°C, Southern European nations unite on water conservation, heat mitigation, and wildfire prevention strategies to protect millions.</p>
+          <h3 class="card-title">Europe's Historic Heatwave: Mediterranean Countries Launch Climate Plan</h3>
+          <p class="card-excerpt">As temperatures soar past 42°C, Southern European nations unite on water conservation, heat mitigation, and wildfire prevention strategies.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>May 17, 2026</span>
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 6 min</span>
             </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Europe's Historic Heatwave: Mediterranean Countries Launch First Joint Climate Action Plan')">&#128279; Share</button>
-          </div>
-        </div>
-      </a>
-      <a class="article-card animate-in" href="articles/world-bank-economic-slowdown.html">
-        <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" alt="Global Conflict" loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="card-category cat-current">Current Affairs</span>
-          <h3 class="card-title">Global Economic Outlook: World Bank Warns of Growth Slowing to 2.5% in 2026</h3>
-          <p class="card-excerpt">A new report warns that persistent inflation, high interest rates, and trade disruptions could lead to a protracted period of sluggish growth for developing economies.</p>
-          <div class="card-footer">
-            <div class="card-footer-left">
-              <span>July 1, 2026</span>
-              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
-            </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global Economic Outlook: World Bank Warns of Growth Slowing to 2.5% in 2026')">&#128279; Share</button>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Europe Heatwave Plan')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -238,17 +292,34 @@
         <div class="section-tag">Level Up</div>
         <h2>Motivation</h2>
       </div>
-      <a href="#" class="view-all">View all &rarr;</a>
+      <a href="#motivation" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
+      <a class="article-card animate-in" href="articles/micro-habits-1-percent-rule.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80" alt="1 Percent Rule" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-motivation">Motivation</span>
+          <h3 class="card-title">The 1% Rule: How Micro-Habits Compound Into Extraordinary Success</h3>
+          <p class="card-excerpt">Discover how small, consistent 1% improvements every day compound into massive transformations over 100 days. Practical routines for long-term growth.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>August 12, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The 1% Rule: Micro-Habits Compound Into Extraordinary Success')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
       <a class="article-card animate-in" href="articles/5-mindset-shifts.html">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="Success Mindset" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="Mindset Shifts" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-category cat-motivation">Motivation</span>
           <h3 class="card-title">5 Mindset Shifts That Changed My Life</h3>
-          <p class="card-excerpt">Stop chasing motivation — build systems instead. Progress over perfection, energy management over time management, saying no to say yes, failure as data, consistency over intensity.</p>
+          <p class="card-excerpt">Stop chasing motivation — build systems instead. Progress over perfection, energy management over time management, saying no to say yes, failure as data.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>July 1, 2026</span>
@@ -260,12 +331,12 @@
       </a>
       <a class="article-card animate-in" href="articles/5am-club-work.html">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="Morning Routine" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="5AM Club" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-category cat-motivation">Motivation</span>
           <h3 class="card-title">The 5AM Club: Does It Actually Work?</h3>
-          <p class="card-excerpt">We tested waking up at 5AM for 30 days and tracked focus levels, output, and wellbeing. The results surprised us — it's not for everyone, but when it works, the difference is dramatic.</p>
+          <p class="card-excerpt">We tested waking up at 5AM for 30 days and tracked focus levels, output, and wellbeing. The results surprised us — it's not for everyone, but when it works, it shines.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>May 17, 2026</span>
@@ -275,20 +346,67 @@
           </div>
         </div>
       </a>
-      <a class="article-card animate-in" href="articles/from-zero-to-hero.html">
+    </div>
+  </section>
+
+  <!-- SPORTS -->
+  <section id="sports" style="background: var(--bg-secondary);">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Game On</div>
+        <h2>Sports</h2>
+      </div>
+      <a href="#sports" class="view-all">View all &rarr;</a>
+    </div>
+    <div class="articles-grid">
+      <a class="article-card animate-in" href="articles/champions-league-2026-upsets.html">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Overcoming" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="Champions League" loading="lazy">
         </div>
         <div class="card-body">
-          <span class="card-category cat-motivation">Motivation</span>
-          <h3 class="card-title">From Zero to Hero: Real Stories of Overcoming</h3>
-          <p class="card-excerpt">Meet Tendai: fired at 35, built a logistics company worth $2M. Aisha: single mother who taught herself to code. Marcus: dropped out, got his GED at 28, now runs a community gym.</p>
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Champions League 2026: Real Sociedad Stuns Bayern Munich in 3-2 Comeback</h3>
+          <p class="card-excerpt">An unforgettable European night in San Sebastián as Sociedad overturns a two-goal deficit with a 94th-minute winner against Bayern Munich.</p>
           <div class="card-footer">
             <div class="card-footer-left">
-              <span>May 15, 2026</span>
-              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 6 min</span>
+              <span>August 13, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
             </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('From Zero to Hero: Real Stories of Overcoming')">&#128279; Share</button>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Champions League: Real Sociedad Stuns Bayern Munich')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card animate-in" href="articles/habs-nhl-playoffs-miracle.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=600&q=80" alt="Habs OT Winner" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Montreal Canadiens Complete Game 7 OT Miracle</h3>
+          <p class="card-excerpt">Alex Newhook's overtime winner caps a miraculous Game 7 comeback for the Montreal Canadiens against the Buffalo Sabres.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>August 13, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Montreal Canadiens Complete Game 7 OT Miracle')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card animate-in" href="articles/wembanyama-spurs-thunder.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80" alt="Wembanyama Basketball" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Wembanyama Drops 41 PTS & 24 REB as Spurs Stun Thunder in 2OT</h3>
+          <p class="card-excerpt">Victor Wembanyama delivers a legendary postseason performance as San Antonio wins Game 1 of the Western Conference Finals in double overtime.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>May 20, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Wembanyama Drops 41 PTS & 24 REB as Spurs Stun Thunder')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -523,6 +641,74 @@
         msg.style.display = 'none';
       }, 5000);
     }
+
+    // INSTANT SEARCH & FILTER LOGIC
+    let currentFilter = 'all';
+    function setFilter(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterArticles();
+    }
+
+    function filterArticles() {
+      const query = (document.getElementById('articleSearchInput').value || '').toLowerCase().trim();
+      const cards = document.querySelectorAll('.article-card, .featured-main');
+      
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const matchesQuery = !query || text.includes(query);
+        let matchesCat = true;
+
+        if (currentFilter !== 'all') {
+          const categoryElem = card.querySelector('.card-category');
+          if (categoryElem) {
+            const catText = categoryElem.textContent.toLowerCase().replace(/\s+/g, '-');
+            matchesCat = catText.includes(currentFilter);
+          }
+        }
+
+        if (matchesQuery && matchesCat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // DAILY POLL LOGIC
+    let pollVotes = JSON.parse(localStorage.getItem('kotcomps_poll_votes') || '[142, 98, 76, 54]');
+    let hasVoted = localStorage.getItem('kotcomps_has_voted') === 'true';
+
+    function renderPoll() {
+      const total = pollVotes.reduce((a, b) => a + b, 0);
+      pollVotes.forEach((count, i) => {
+        const pct = Math.round((count / total) * 100);
+        const bar = document.getElementById('pollBar' + i);
+        const pctText = document.getElementById('pollPct' + i);
+        if (bar && pctText) {
+          bar.style.width = (hasVoted ? pct : 0) + '%';
+          pctText.textContent = hasVoted ? (pct + '%') : '';
+        }
+      });
+      const msg = document.getElementById('pollStatusMsg');
+      if (msg && hasVoted) {
+        msg.textContent = `Thanks for voting! Total community votes cast: ${total}`;
+        msg.style.color = 'var(--success)';
+      }
+    }
+
+    function votePoll(optionIdx) {
+      if (hasVoted) return;
+      pollVotes[optionIdx]++;
+      hasVoted = true;
+      localStorage.setItem('kotcomps_poll_votes', JSON.stringify(pollVotes));
+      localStorage.setItem('kotcomps_has_voted', 'true');
+      renderPoll();
+    }
+
+    // Initialize poll on load
+    document.addEventListener('DOMContentLoaded', renderPoll);
   </script>
 
   <!-- FLOATING FB BANNER -->
