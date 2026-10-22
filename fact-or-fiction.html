@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fact or Fiction? 2026 Viral News & Sports Blitz — KOTCOMPS</title>
+  <meta name="description" content="Can you distinguish real viral 2026 news and sports headlines from pure fiction? Test your instincts in the KOTCOMPS Fact or Fiction challenge!">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kotcomps.github.io/fact-or-fiction.html">
+  <meta property="og:title" content="Fact or Fiction? The 2026 Viral News & Sports Blitz">
+  <meta property="og:description" content="7 bizarre headlines from 2026. Can you spot what really happened and what is total fiction? Test yourself and challenge friends on Facebook!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1504711434969-e33886168d9c?w=900&q=80">
+  <meta property="og:site_name" content="KOTCOMPS">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236c5ce7'/><text x='50' y='72' font-size='60' font-weight='800' text-anchor='middle' fill='white'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .game-page {
+      padding-top: 100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg-primary);
+    }
+    .game-container {
+      max-width: 680px;
+      width: 90%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .game-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(108, 92, 231, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--warning), var(--accent), var(--success));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+    .question-headline {
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1.45;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+    .headline-category {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--warning);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .score-summary-card {
+      display: none;
+      animation: fadeInUp 0.5s ease-out;
+    }
+    .badge-display {
+      font-size: 3.5rem;
+      margin: 1.5rem 0 0.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">KOT<span>COMPS</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#trending">Trending</a></li>
+        <li><a href="index.html#current-affairs">Current Affairs</a></li>
+        <li><a href="index.html#motivation">Motivation</a></li>
+        <li><a href="index.html#sports">Sports</a></li>
+        <li><a href="quiz.html" style="color: var(--success) !important; font-weight: 700;">Play Quiz</a></li>
+        <li><a href="spin.html" style="color: var(--accent-light) !important; font-weight: 700;">Spin Wheel</a></li>
+        <li><a href="fact-or-fiction.html" style="color: var(--warning) !important; font-weight: 700;">Fact vs Fiction</a></li>
+        <li><a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="nav-cta">Follow on FB</a></li>
+      </ul>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <main class="game-page">
+    <div class="game-container">
+      
+      <!-- GAMEPLAY SCREEN -->
+      <div id="gameplayScreen">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="gameProgressBar"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span class="headline-category" id="headlineCategory">🔥 Viral News</span>
+          <div class="streak-counter" id="streakDisplay">🔥 Streak: 0</div>
+        </div>
+
+        <div class="question-headline" id="headlineText">Loading challenge...</div>
+
+        <!-- FACT / FICTION CHOICES -->
+        <div class="fact-choice-grid">
+          <button class="fact-choice-btn fact" id="factBtn" onclick="handleGuess(true)">
+            <span class="emoji">✅</span>
+            <span>FACT</span>
+          </button>
+          <button class="fact-choice-btn fiction" id="fictionBtn" onclick="handleGuess(false)">
+            <span class="emoji">❌</span>
+            <span>FICTION</span>
+          </button>
+        </div>
+
+        <!-- EXPLANATION POPUP -->
+        <div class="fact-explanation-box" id="explanationBox">
+          <div id="verdictBadge"></div>
+          <p id="explanationText" style="color: var(--text-primary); font-size: 0.96rem; line-height: 1.6;"></p>
+          <div id="readMoreWrap" style="margin-top: 1rem;"></div>
+          <button class="btn btn-primary" id="nextQuestionBtn" onclick="nextQuestion()" style="margin-top: 1.2rem; width: 100%;">
+            Next Headline &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- SCORE SUMMARY SCREEN -->
+      <div class="score-summary-card" id="scoreScreen">
+        <div class="badge-display" id="badgeEmoji">🏆</div>
+        <div class="section-tag" id="scoreTag">Challenge Completed!</div>
+        <h2 id="scoreTitle" style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Truth Master!</h2>
+        <p id="scoreSubtitle" style="color: var(--text-secondary); margin-bottom: 1.5rem;">You correctly verified 7 out of 7 headlines.</p>
+
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+          <div style="font-size: 2.4rem; font-weight: 900; color: var(--warning);" id="scorePercentage">100%</div>
+          <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Accuracy Score</div>
+        </div>
+
+        <!-- SOCIAL SHARE BUTTONS -->
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.5rem;">
+          <button class="share-btn share-btn-fb" onclick="shareScoreFB()" style="width: 100%; justify-content: center; padding: 0.9rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Share High Score on Facebook
+          </button>
+          <div style="display: flex; gap: 0.8rem;">
+            <button class="share-btn share-btn-x" onclick="shareScoreX()" style="flex: 1; justify-content: center;">
+              Twitter / X
+            </button>
+            <button class="share-btn share-btn-wa" onclick="shareScoreWA()" style="flex: 1; justify-content: center;">
+              WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn-outline" onclick="restartGame()" style="width: 100%;">Play Again</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notification" id="toastNotification">
+    <span class="toast-icon">✨</span>
+    <span id="toastMessage">Link copied to clipboard!</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <a href="index.html" class="logo">KOT<span>COMPS</span></a>
+        <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+          Your trusted source for current affairs, motivation, sports updates, and trending stories.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html#trending">Trending</a></li>
+          <li><a href="index.html#current-affairs">Current Affairs</a></li>
+          <li><a href="index.html#motivation">Motivation</a></li>
+          <li><a href="index.html#sports">Sports</a></li>
+          <li><a href="quiz.html">Play Quiz</a></li>
+          <li><a href="spin.html">Spin Wheel</a></li>
+          <li><a href="fact-or-fiction.html">Fact vs Fiction</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+          Join our growing community on Facebook for daily updates and interactive content.
+        </p>
+        <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;">
+          Follow on Facebook
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KOTCOMPS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Audio synthesizer via Web Audio API
+    let audioCtx = null;
+    function playTone(freq, type, duration) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    const headlinesData = [
+      {
+        category: "Trending & Crime",
+        headline: "Police in Ecuador seized 800 pounds of cocaine bricks stamped with Manchester City striker Erling Haaland's face.",
+        isFact: true,
+        explanation: "FACT! In a bizarre bust that went viral worldwide, Ecuadorian narcotics officers intercepted packages stamped with Haaland's official portrait and team colours.",
+        articleUrl: "articles/haaland-cocaine-bricks-ecuador.html"
+      },
+      {
+        category: "Current Affairs & Tech",
+        headline: "Hackers deployed the world's first fully autonomous AI agent squad to orchestrate a major cyberattack against Taiwan.",
+        isFact: true,
+        explanation: "FACT! Cybersecurity investigators confirmed that no human executed the attack instructions in real time — the AI agent swarm planned and breached the targeted infrastructure autonomously.",
+        articleUrl: "articles/taiwan-ai-agent-cyberattack.html"
+      },
+      {
+        category: "Sports & Rules",
+        headline: "FIFA officially passed a rule eliminating extra time in the 2026 World Cup knockout stages, jumping straight to a 5-minute golden goal shootout.",
+        isFact: false,
+        explanation: "FICTION! While extra-time formats have been frequently debated, FIFA retains standard extra time periods followed by penalty shootouts for the 2026 tournament.",
+        articleUrl: "articles/fifa-world-cup-2026.html"
+      },
+      {
+        category: "Zimbabwe Focus",
+        headline: "Zimbabwe's gold-backed ZiG currency recorded an 85% digital transaction share across retail checkouts in October 2026.",
+        isFact: true,
+        explanation: "FACT! Official data shows over 85% of domestic transactions are now settled digitally via POS, QR codes, and mobile money backed by surging gold and foreign reserves.",
+        articleUrl: "articles/zimbabwe-gold-zig-digital-surge-2026.html"
+      },
+      {
+        category: "Breakthrough Science",
+        headline: "Scientists in 2026 successfully beamed commercial solar electricity wirelessly from low Earth orbit directly to ground power stations.",
+        isFact: true,
+        explanation: "FACT! The orbital energy demonstrator satellite beamed microwave power continuously through cloud layers to ground rectenna stations.",
+        articleUrl: "articles/space-solar-power-beaming-milestone.html"
+      },
+      {
+        category: "Sports & Basketball",
+        headline: "Victor Wembanyama scored 75 points against the Thunder using exclusively one-handed running skyhooks.",
+        isFact: false,
+        explanation: "FICTION! Wemby did put up a legendary 41 PTS, 24 REB double-overtime masterpiece against OKC, but the 75-point all-skyhook game is pure social media satire!",
+        articleUrl: "articles/wembanyama-spurs-thunder.html"
+      },
+      {
+        category: "Global Current Affairs",
+        headline: "Rescue workers pulled a 29-year-old woman alive after 36 hours trapped under hospital rubble following the Colombia earthquake.",
+        isFact: true,
+        explanation: "FACT! Daniela Largo was miraculously recovered alive in Cali, producing an emotional video viewed millions of times across the globe.",
+        articleUrl: "articles/colombia-earthquake-216-dead.html"
+      }
+    ];
+
+    let currentIndex = 0;
+    let score = 0;
+    let currentStreak = 0;
+    let maxStreak = 0;
+
+    function renderQuestion() {
+      const q = headlinesData[currentIndex];
+      document.getElementById('headlineCategory').textContent = q.category;
+      document.getElementById('headlineText').textContent = `"${q.headline}"`;
+      document.getElementById('streakDisplay').textContent = `🔥 Streak: ${currentStreak}`;
+      
+      const pct = (currentIndex / headlinesData.length) * 100;
+      document.getElementById('gameProgressBar').style.width = pct + '%';
+
+      // Reset buttons and explanation
+      const factBtn = document.getElementById('factBtn');
+      const fictionBtn = document.getElementById('fictionBtn');
+      factBtn.className = 'fact-choice-btn fact';
+      fictionBtn.className = 'fact-choice-btn fiction';
+      factBtn.disabled = false;
+      fictionBtn.disabled = false;
+
+      document.getElementById('explanationBox').classList.remove('show');
+    }
+
+    function handleGuess(userGuess) {
+      const q = headlinesData[currentIndex];
+      const isCorrect = userGuess === q.isFact;
+
+      const factBtn = document.getElementById('factBtn');
+      const fictionBtn = document.getElementById('fictionBtn');
+      factBtn.disabled = true;
+      fictionBtn.disabled = true;
+
+      if (isCorrect) {
+        score++;
+        currentStreak++;
+        if (currentStreak > maxStreak) maxStreak = currentStreak;
+        playTone(587.33, 'triangle', 0.25); // D5
+        setTimeout(() => playTone(880, 'sine', 0.35), 120); // A5
+      } else {
+        currentStreak = 0;
+        playTone(220, 'sawtooth', 0.4); // A3
+      }
+
+      // Highlight buttons
+      if (q.isFact) {
+        factBtn.classList.add('correct');
+        if (!userGuess) fictionBtn.classList.add('incorrect');
+      } else {
+        fictionBtn.classList.add('correct');
+        if (userGuess) factBtn.classList.add('incorrect');
+      }
+
+      // Update streak
+      document.getElementById('streakDisplay').textContent = `🔥 Streak: ${currentStreak}`;
+
+      // Build explanation
+      const badge = document.getElementById('verdictBadge');
+      badge.innerHTML = `<span class="fact-verdict-tag ${q.isFact ? 'fact' : 'fiction'}">${isCorrect ? '✅ YOU NAILED IT!' : '❌ NOT QUITE!'} ${q.isFact ? 'THIS IS FACT' : 'THIS IS FICTION'}</span>`;
+      document.getElementById('explanationText').textContent = q.explanation;
+      
+      const readMore = document.getElementById('readMoreWrap');
+      if (q.articleUrl) {
+        readMore.innerHTML = `<a href="${q.articleUrl}" style="color: var(--accent-light); font-weight: 700; text-decoration: none; font-size: 0.9rem;">Read the full story on KOTCOMPS &rarr;</a>`;
+      } else {
+        readMore.innerHTML = '';
+      }
+
+      document.getElementById('explanationBox').classList.add('show');
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex < headlinesData.length) {
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('gameplayScreen').style.display = 'none';
+      const scoreScreen = document.getElementById('scoreScreen');
+      scoreScreen.style.display = 'block';
+
+      const pct = Math.round((score / headlinesData.length) * 100);
+      document.getElementById('scorePercentage').textContent = pct + '%';
+      document.getElementById('scoreSubtitle').textContent = `You correctly called ${score} out of ${headlinesData.length} headlines. (Best Streak: ${maxStreak})`;
+
+      const badge = document.getElementById('badgeEmoji');
+      const title = document.getElementById('scoreTitle');
+
+      if (score >= 6) {
+        badge.textContent = '🏆';
+        title.textContent = 'Certified Truth Detective!';
+        playTone(523.25, 'triangle', 0.2);
+        setTimeout(() => playTone(659.25, 'triangle', 0.2), 150);
+        setTimeout(() => playTone(783.99, 'triangle', 0.4), 300);
+      } else if (score >= 4) {
+        badge.textContent = '🔍';
+        title.textContent = 'Sharp News Analyst!';
+      } else {
+        badge.textContent = '⚡';
+        title.textContent = 'Viral Blitz Survivor!';
+      }
+    }
+
+    function restartGame() {
+      currentIndex = 0;
+      score = 0;
+      currentStreak = 0;
+      document.getElementById('gameplayScreen').style.display = 'block';
+      document.getElementById('scoreScreen').style.display = 'none';
+      renderQuestion();
+    }
+
+    function shareScoreFB() {
+      const text = `I just scored ${score}/${headlinesData.length} in the KOTCOMPS 2026 Fact or Fiction Challenge! Can you spot the real viral headlines?`;
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://kotcomps.github.io/fact-or-fiction.html')}&quote=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
+    }
+
+    function shareScoreX() {
+      const text = `I scored ${score}/${headlinesData.length} in the @KOTCOMPS Fact or Fiction 2026 Challenge! Can you beat my streak?`;
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://kotcomps.github.io/fact-or-fiction.html')}`, '_blank', 'width=600,height=400');
+    }
+
+    function shareScoreWA() {
+      const text = `I scored ${score}/${headlinesData.length} in the KOTCOMPS Fact or Fiction challenge! Play here: https://kotcomps.github.io/fact-or-fiction.html`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', renderQuestion);
+  </script>
+</body>
+</html>

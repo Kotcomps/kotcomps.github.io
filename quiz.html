@@ -186,6 +186,9 @@
         <li><a href="index.html#motivation">Motivation</a></li>
         <li><a href="index.html#sports">Sports</a></li>
         <li><a href="quiz.html" class="nav-cta" style="background: var(--success) !important;">Play Quiz</a></li>
+        <li><a href="spin.html" style="color: var(--accent-light) !important; font-weight: 700;">Spin Wheel</a></li>
+        <li><a href="fact-or-fiction.html" style="color: var(--warning) !important; font-weight: 700;">Fact vs Fiction</a></li>
+        <li><a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="nav-cta">Follow on FB</a></li>
       </ul>
       <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     </div>
@@ -261,38 +264,41 @@
       <a href="index.html#current-affairs">Current Affairs</a>
       <a href="index.html#motivation">Motivation</a>
       <a href="index.html#sports">Sports</a>
+      <a href="quiz.html">Play Quiz</a>
+      <a href="spin.html">Spin Wheel</a>
+      <a href="fact-or-fiction.html">Fact vs Fiction</a>
       <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener">Facebook</a>
     </div>
     <p class="footer-copy">&copy; 2026 KOTCOMPS. All rights reserved.</p>
   </footer>
 
   <script>
-    // Quiz Questions Data
+    // Quiz Questions Data (Refreshed for October 2026)
     const questions = [
       {
-        text: "Which player scored 41 points in double overtime during Game 1 of the 2026 Western Conference Finals?",
+        text: "What major digital milestone did Zimbabwe's gold-backed ZiG currency reach in October 2026?",
+        options: ["Over 85% digital transaction share across retail", "Complete parity with the British Pound", "Phasing out all commercial banks", "Adoption as the single currency of Africa"],
+        correct: 0
+      },
+      {
+        text: "Which player scored 41 points in double overtime during Game 1 of the Western Conference Finals?",
         options: ["Shai Gilgeous-Alexander", "Chet Holmgren", "Victor Wembanyama", "Stephon Castle"],
         correct: 2
       },
       {
-        text: "How many major trophies did Pep Guardiola win during his 10-year tenure at Manchester City?",
-        options: ["12 Trophies", "15 Trophies", "17 Trophies", "20 Trophies"],
-        correct: 2
-      },
-      {
-        text: "President Trump called off a planned strike on which country after requests from Gulf States?",
-        options: ["Iraq", "Iran", "Syria", "Yemen"],
-        correct: 1
-      },
-      {
-        text: "In the 30-day 5AM Club experiment, what was the primary drawback reported by participants who didn't sleep early?",
-        options: ["Exhaustion / sleep debt", "Increased hunger", "Memory loss", "No change in focus"],
+        text: "What orbital energy breakthrough was successfully demonstrated in October 2026?",
+        options: ["Space-based solar power wirelessly beamed to Earth", "First permanent city on the Moon", "Orbital teleportation grid", "Atmospheric magnetic shield"],
         correct: 0
       },
       {
-        text: "The WHO declared an international emergency in 2026 due to an Ebola outbreak in which country?",
-        options: ["Uganda", "Democratic Republic of Congo", "Rwanda", "Liberia"],
+        text: "According to the 90-Minute Focus Protocol, which biological cycle regulates peak cognitive alertness?",
+        options: ["Circadian rhythm", "Ultradian rhythm", "Infradian rhythm", "Metabolic curve"],
         correct: 1
+      },
+      {
+        text: "How did Zimbabwe's Warriors stun group favorites in their AFCON 2027 qualifier in October 2026?",
+        options: ["2-1 comeback with 92nd-minute stoppage time winner", "A walkover 3-0 administrative decision", "10-0 friendly blowout", "Penalty shootout after goalless draw"],
+        correct: 0
       }
     ];
 

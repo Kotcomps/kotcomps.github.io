@@ -17,31 +17,67 @@
 </head>
 <body>
 
+  <!-- READING PROGRESS BAR -->
+  <div class="reading-progress-bar" id="progressBar"></div>
+
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="logo">KOT<span>COMPS</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html#trending">Trending</a></li>
-        <li><a href="index.html#current-affairs">Current Affairs</a></li>
-        <li><a href="index.html#motivation">Motivation</a></li>
-        <li><a href="index.html#sports">Sports</a></li>
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#current-affairs">Current Affairs</a></li>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#sports">Sports</a></li>
         <li><a href="quiz.html" style="color: var(--success) !important; font-weight: 700;">Play Quiz</a></li>
         <li><a href="spin.html" style="color: var(--accent-light) !important; font-weight: 700;">Spin Wheel</a></li>
+        <li><a href="fact-or-fiction.html" style="color: var(--warning) !important; font-weight: 700;">Fact vs Fiction</a></li>
         <li><a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener" class="nav-cta">Follow on FB</a></li>
       </ul>
       <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     </div>
   </nav>
 
+  <!-- LIVE BREAKING NEWS TICKER -->
+  <div class="news-ticker-bar">
+    <div class="ticker-badge">
+      <span class="ticker-dot"></span> Breaking
+    </div>
+    <div class="ticker-track">
+      <a href="articles/zimbabwe-gold-zig-digital-surge-2026.html" class="ticker-item">
+        <span>🇿🇼 Zimbabwe Gold (ZiG) Digital Transactions Cross 85% Milestone as Foreign Reserves Hit Record High</span>
+      </a>
+      <span class="ticker-sep">•</span>
+      <a href="articles/warriors-afcon-2027-qualifiers-triumph.html" class="ticker-item">
+        <span>⚽ Warriors Stun Group Favorites in 2-1 Comeback Thriller in AFCON 2027 Qualifiers</span>
+      </a>
+      <span class="ticker-sep">•</span>
+      <a href="articles/space-solar-power-beaming-milestone.html" class="ticker-item">
+        <span>🛰️ Orbital Energy Breakthrough: Commercial Space-Based Solar Power Beamed to Earth</span>
+      </a>
+      <span class="ticker-sep">•</span>
+      <a href="articles/autonomous-agent-teams-nobel-2026.html" class="ticker-item">
+        <span>🤖 Autonomous AI Research Swarms Crack Decades-Old Biological Riddle</span>
+      </a>
+      <span class="ticker-sep">•</span>
+      <a href="articles/ballon-dor-2026-showdown.html" class="ticker-item">
+        <span>🏆 Ballon d'Or 2026: Vinícius, Rodri & Haaland in Epic Four-Way Climax in Paris</span>
+      </a>
+      <span class="ticker-sep">•</span>
+      <a href="articles/the-90-minute-focus-protocol.html" class="ticker-item">
+        <span>💡 The 90-Minute Focus Protocol: Why High Performers Abandon 12-Hour Hustle Culture</span>
+      </a>
+    </div>
+  </div>
+
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" style="margin-top: 0;">
     <div class="hero-bg">
       <img src="https://images.unsplash.com/photo-1504711434969-e33886168d9c?w=1600&q=80" alt="Background" loading="eager">
     </div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Updated Daily</div>
+      <div class="hero-badge"><span class="dot"></span> October 2026 Edition — Live & Verified</div>
       <h1>Stay <span class="highlight">Informed</span>. Stay <span class="highlight">Inspired</span>.</h1>
       <p>Well-researched current affairs, powerful motivation, live sports coverage, and trending stories — all in one place.</p>
       <div class="hero-buttons">
@@ -59,14 +95,14 @@
     <div class="search-container">
       <div class="search-input-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" id="articleSearchInput" placeholder="Search articles by title, topic, or keyword (e.g. AI, Wembanyama, Habits)..." onkeyup="filterArticles()">
+        <input type="text" id="articleSearchInput" placeholder="Search articles by title, topic, or keyword (e.g. ZiG, AI, Warriors, Habits)..." onkeyup="filterArticles()">
       </div>
       <div class="search-filter-pills">
-        <button class="filter-pill active" onclick="setFilter('all', this)">All Stories</button>
-        <button class="filter-pill" onclick="setFilter('trending', this)">🔥 Trending</button>
-        <button class="filter-pill" onclick="setFilter('current-affairs', this)">🌍 Current Affairs</button>
-        <button class="filter-pill" onclick="setFilter('motivation', this)">💡 Motivation</button>
-        <button class="filter-pill" onclick="setFilter('sports', this)">⚽ Sports</button>
+        <button class="filter-pill active" onclick="setFilter('all', this)">All Stories <span class="pill-count">23</span></button>
+        <button class="filter-pill" onclick="setFilter('trending', this)">🔥 Trending <span class="pill-count">6</span></button>
+        <button class="filter-pill" onclick="setFilter('current-affairs', this)">🌍 Current Affairs <span class="pill-count">6</span></button>
+        <button class="filter-pill" onclick="setFilter('motivation', this)">💡 Motivation <span class="pill-count">5</span></button>
+        <button class="filter-pill" onclick="setFilter('sports', this)">⚽ Sports <span class="pill-count">6</span></button>
       </div>
     </div>
   </section>
@@ -76,9 +112,9 @@
     <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem; flex-direction: column; align-items: center; justify-content: center;">
       <div class="section-tag" style="text-align: center;">Play & Share</div>
       <h2 style="font-size: 2.2rem; font-weight: 800; text-align: center;">Interactive Challenges</h2>
-      <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1rem; text-align: center;">Test your knowledge, get your daily fortune, and challenge your friends on Facebook!</p>
+      <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1rem; text-align: center;">Test your knowledge, verify viral headlines, get your daily fortune, and challenge friends on Facebook!</p>
     </div>
-    <div class="articles-grid" style="max-width: 900px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+    <div class="articles-grid" style="max-width: 1050px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
       
       <!-- Quiz Card -->
       <a href="quiz.html" class="article-card animate-in" style="border-color: rgba(0, 184, 148, 0.25);">
@@ -89,7 +125,7 @@
         <div class="card-body">
           <span class="card-category cat-motivation" style="color: var(--success); background: rgba(0, 184, 148, 0.12);">KOTCOMPS Trivia</span>
           <h3 class="card-title">Ultimate Trivia Quiz Challenge</h3>
-          <p class="card-excerpt">How well do you know current affairs, trending news, and sports? Take our 5-question test, get your custom badge, and post your high score on Facebook!</p>
+          <p class="card-excerpt">How well do you know current affairs, trending news, and sports? Take our 5-question test, get your custom badge, and post your score on Facebook!</p>
           <div class="card-footer" style="margin-top: 1.5rem;">
             <span style="font-weight: 600; color: var(--success);">Play Now &rarr;</span>
             <span style="color: var(--text-muted);">⏱ 3 min play</span>
@@ -114,6 +150,23 @@
         </div>
       </a>
 
+      <!-- Fact or Fiction Card -->
+      <a href="fact-or-fiction.html" class="article-card animate-in" style="border-color: rgba(253, 203, 110, 0.25);">
+        <div class="card-img-wrap" style="height: 180px;">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168d9c?w=600&q=80" alt="Fact or Fiction Challenge" loading="lazy">
+          <span class="badge-latest" style="background: var(--warning); color: #2d3436;">NEW GAME</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-trending" style="color: var(--warning); background: rgba(253, 203, 110, 0.12);">Blitz Challenge</span>
+          <h3 class="card-title">Fact or Fiction? 2026 Blitz</h3>
+          <p class="card-excerpt">Can you tell real viral news headlines apart from tricky satire? Test your instincts across 7 wild 2026 headlines, build your streak, and earn your Detective badge!</p>
+          <div class="card-footer" style="margin-top: 1.5rem;">
+            <span style="font-weight: 600; color: var(--warning);">Play Blitz &rarr;</span>
+            <span style="color: var(--text-muted);">🔥 Rapid fire</span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </section>
 
@@ -122,29 +175,29 @@
     <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 2.5rem; flex-direction: column; align-items: center;">
       <div class="section-tag">Community Vote</div>
       <h2>Poll of the Day</h2>
-      <p style="color: var(--text-secondary); margin-top: 0.4rem;">Vote and instantly view community results!</p>
+      <p style="color: var(--text-secondary); margin-top: 0.4rem;">Vote and instantly view real-time community results!</p>
     </div>
     <div class="poll-card animate-in">
-      <h3 id="pollQuestion" style="font-size: 1.3rem; font-weight: 700; text-align: center;">What will be the most defining breakthrough of 2026?</h3>
+      <h3 id="pollQuestion" style="font-size: 1.3rem; font-weight: 700; text-align: center;">What is the most defining breakthrough of late 2026?</h3>
       <div class="poll-options" id="pollOptions">
         <button class="poll-option-btn" onclick="votePoll(0)">
           <div class="poll-bar-fill" id="pollBar0"></div>
-          <span style="position: relative; z-index: 2;">🤖 Autonomous AI Superintelligence Accord</span>
+          <span style="position: relative; z-index: 2;">🇿🇼 Zimbabwe ZiG Digital Currency & Reserve Stability</span>
           <span class="poll-pct" id="pollPct0" style="position: relative; z-index: 2;">--</span>
         </button>
         <button class="poll-option-btn" onclick="votePoll(1)">
           <div class="poll-bar-fill" id="pollBar1"></div>
-          <span style="position: relative; z-index: 2;">⚽ 2026 FIFA World Cup Drama</span>
+          <span style="position: relative; z-index: 2;">🤖 Autonomous Multi-Agent AI Research Swarms</span>
           <span class="poll-pct" id="pollPct1" style="position: relative; z-index: 2;">--</span>
         </button>
         <button class="poll-option-btn" onclick="votePoll(2)">
           <div class="poll-bar-fill" id="pollBar2"></div>
-          <span style="position: relative; z-index: 2;">💡 Micro-Habits & Mindset Systems</span>
+          <span style="position: relative; z-index: 2;">🏆 Ballon d'Or 2026 & UEFA Champions League Climax</span>
           <span class="poll-pct" id="pollPct2" style="position: relative; z-index: 2;">--</span>
         </button>
         <button class="poll-option-btn" onclick="votePoll(3)">
           <div class="poll-bar-fill" id="pollBar3"></div>
-          <span style="position: relative; z-index: 2;">🚀 Next-Gen Space Exploration & Tech</span>
+          <span style="position: relative; z-index: 2;">🛰️ Orbital Clean Energy & Space-Based Solar Power</span>
           <span class="poll-pct" id="pollPct3" style="position: relative; z-index: 2;">--</span>
         </button>
       </div>
@@ -164,39 +217,39 @@
       <a href="#trending" class="view-all">View all &rarr;</a>
     </div>
     <div class="featured-grid">
-      <div class="featured-main animate-in" onclick="window.location.href='articles/colombia-earthquake-216-dead.html'">
+      <div class="featured-main animate-in" onclick="window.location.href='articles/space-solar-power-beaming-milestone.html'">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1547697133-5e8a0b96a3f3?w=900&q=80" alt="Colombia Earthquake" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&q=80" alt="Space Solar Power Beaming" loading="lazy">
           <span class="badge-latest">Breaking</span>
         </div>
         <div class="card-body">
-          <span class="card-category cat-current">Current Affairs</span>
-          <h3 class="card-title">Colombia Earthquake: Rescue workers pull woman alive after 36 hours under rubble</h3>
-          <p class="card-excerpt">A 6.7-magnitude quake has killed at least 216 people. In a moment now viewed millions of times, one woman was pulled alive after 36 hours trapped.</p>
+          <span class="card-category cat-trending">Trending</span>
+          <h3 class="card-title">Orbital Energy Milestone: First Commercial Space-Based Solar Power Successfully Beamed to Earth</h3>
+          <p class="card-excerpt">A landmark engineering triumph: orbital solar satellites beam continuous wireless microwave electricity through cloud layers directly to ground power stations.</p>
           <div class="card-footer">
             <div class="card-footer-left">
-              <span>August 13, 2026</span>
+              <span>October 17, 2026</span>
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
             </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Colombia Earthquake: Rescue workers pull woman alive after 36 hours under rubble')">&#128279; Share</button>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Orbital Energy Milestone: First Space Solar Power Beamed to Earth')">&#128279; Share</button>
           </div>
         </div>
       </div>
       <div class="featured-side">
-        <a class="article-card animate-in" href="articles/europe-total-solar-eclipse-2026.html">
+        <a class="article-card animate-in" href="articles/taiwan-ai-agent-cyberattack.html">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=600&q=80" alt="Total Solar Eclipse" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80" alt="AI Cyberattack" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-category cat-trending">Trending</span>
-            <h3 class="card-title">Half a million flock to Spain as total solar eclipse plunges Europe into darkness</h3>
-            <p class="card-excerpt">A rare total eclipse turned day into night across Spain and parts of Europe. The footage has the internet completely obsessed.</p>
+            <h3 class="card-title">Hackers used fully autonomous AI agents to attack Taiwan</h3>
+            <p class="card-excerpt">Experts call it the first known fully autonomous AI cyberattack. No human clicked "send" — the AI ran the whole operation.</p>
             <div class="card-footer">
               <div class="card-footer-left">
                 <span>August 13, 2026</span>
-                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3 min</span>
+                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
               </div>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Half a million flock to Spain as total solar eclipse plunges Europe into darkness')">&#128279; Share</button>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Hackers used fully autonomous AI agents to attack Taiwan')">&#128279; Share</button>
             </div>
           </div>
         </a>
@@ -217,20 +270,37 @@
             </div>
           </div>
         </a>
-        <a class="article-card animate-in" href="articles/taiwan-ai-agent-cyberattack.html">
+        <a class="article-card animate-in" href="articles/colombia-earthquake-216-dead.html">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80" alt="AI Cyberattack" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1547697133-5e8a0b96a3f3?w=600&q=80" alt="Colombia Earthquake" loading="lazy">
           </div>
           <div class="card-body">
             <span class="card-category cat-trending">Trending</span>
-            <h3 class="card-title">Hackers used fully autonomous AI agents to attack Taiwan</h3>
-            <p class="card-excerpt">Experts call it the first known fully autonomous AI cyberattack. No human clicked "send" — the AI ran the whole operation.</p>
+            <h3 class="card-title">Colombia Earthquake: Rescue workers pull woman alive after 36 hours under rubble</h3>
+            <p class="card-excerpt">A 6.7-magnitude quake struck western Colombia. One woman was pulled alive from the rubble in a miraculous rescue viewed millions of times.</p>
             <div class="card-footer">
               <div class="card-footer-left">
                 <span>August 13, 2026</span>
-                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
               </div>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Hackers used fully autonomous AI agents to attack Taiwan')">&#128279; Share</button>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Colombia Earthquake: Rescue workers pull woman alive after 36 hours under rubble')">&#128279; Share</button>
+            </div>
+          </div>
+        </a>
+        <a class="article-card animate-in" href="articles/europe-total-solar-eclipse-2026.html">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=600&q=80" alt="Total Solar Eclipse" loading="lazy">
+          </div>
+          <div class="card-body">
+            <span class="card-category cat-trending">Trending</span>
+            <h3 class="card-title">Half a million flock to Spain as total solar eclipse plunges Europe into darkness</h3>
+            <p class="card-excerpt">A rare total eclipse turned day into night across Spain and parts of Europe, creating an unforgettable celestial spectacle.</p>
+            <div class="card-footer">
+              <div class="card-footer-left">
+                <span>August 13, 2026</span>
+                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3 min</span>
+              </div>
+              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Half a million flock to Spain as total solar eclipse plunges Europe into darkness')">&#128279; Share</button>
             </div>
           </div>
         </a>
@@ -241,30 +311,13 @@
           <div class="card-body">
             <span class="card-category cat-trending">Trending</span>
             <h3 class="card-title">Rockford 'Roki' Josphat Sparks Viral Storm Following Lodge Drama Video</h3>
-            <p class="card-excerpt">Urban Grooves star Roki trends across social media after a viral video surfaced showing a confrontation at a Harare lodge over an alleged unpaid bill.</p>
+            <p class="card-excerpt">Urban Grooves star Roki trends across social media after a confrontation video at a Harare lodge goes viral.</p>
             <div class="card-footer">
               <div class="card-footer-left">
                 <span>August 13, 2026</span>
                 <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3 min</span>
               </div>
               <button class="card-share" onclick="event.stopPropagation(); shareArticle('Rockford Roki Josphat Sparks Viral Storm Following Lodge Drama Video')">&#128279; Share</button>
-            </div>
-          </div>
-        </a>
-        <a class="article-card animate-in" href="articles/ai-superintelligence-2026-summit.html">
-          <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="AI Summit" loading="lazy">
-          </div>
-          <div class="card-body">
-            <span class="card-category cat-trending">Trending</span>
-            <h3 class="card-title">Global AI Summit 2026: 40 Nations Sign Historic Safety Accord</h3>
-            <p class="card-excerpt">World leaders and tech visionaries sign the Geneva Accord on Autonomous AI Governance, setting strict safety protocols as frontier models advance.</p>
-            <div class="card-footer">
-              <div class="card-footer-left">
-                <span>August 13, 2026</span>
-                <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
-              </div>
-              <button class="card-share" onclick="event.stopPropagation(); shareArticle('Global AI Summit 2026: 40 Nations Sign Historic Safety Accord')">&#128279; Share</button>
             </div>
           </div>
         </a>
@@ -282,20 +335,39 @@
       <a href="#current-affairs" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
-      <a class="article-card animate-in" href="articles/kariba-boat-disaster-2026.html">
+      <a class="article-card animate-in" href="articles/zimbabwe-gold-zig-digital-surge-2026.html">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="Kariba Disaster" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="Zimbabwe Gold Currency Market" loading="lazy">
+          <span class="badge-latest">October 2026</span>
         </div>
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
-          <h3 class="card-title">Tragedy on Lake Kariba: 44 Dead as National Disaster Declared</h3>
-          <p class="card-excerpt">Overcrowded RIDA vessel capsizes near Long Island on Lake Kariba following strong waves. President Mnangagwa declares National Disaster.</p>
+          <h3 class="card-title">Zimbabwe's ZiG Enters New Era as Digital Payments Surge and Foreign Reserves Hit Record High</h3>
+          <p class="card-excerpt">Structured gold-backed currency passes the 85% digital transaction share mark across retail checkouts as RBZ reserves climb to 3.5x active circulation.</p>
           <div class="card-footer">
             <div class="card-footer-left">
-              <span>August 13, 2026</span>
+              <span>October 22, 2026</span>
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
             </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Tragedy on Lake Kariba: 44 Dead as National Disaster Declared')">&#128279; Share</button>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Zimbabwe ZiG Enters New Era as Digital Payments Surge')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card animate-in" href="articles/autonomous-agent-teams-nobel-2026.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="Autonomous AI Research Swarms" loading="lazy">
+          <span class="badge-latest">October 2026</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-trending">Current Affairs</span>
+          <h3 class="card-title">From Lab to Reality: Autonomous AI Research Swarms Accelerate 2026 Scientific Breakthroughs</h3>
+          <p class="card-excerpt">Multi-agent AI teams formulate, test, and self-correct scientific proofs at 100x human speeds, sparking debate following the Geneva Accord on AI Governance.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>October 20, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Autonomous AI Research Swarms Accelerate Scientific Breakthroughs')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -316,6 +388,23 @@
           </div>
         </div>
       </a>
+      <a class="article-card animate-in" href="articles/kariba-boat-disaster-2026.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="Kariba Disaster" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-current">Current Affairs</span>
+          <h3 class="card-title">Tragedy on Lake Kariba: 44 Dead as National Disaster Declared</h3>
+          <p class="card-excerpt">Overcrowded RIDA vessel capsizes near Long Island on Lake Kariba following strong waves. President Mnangagwa declares National Disaster.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>August 13, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Tragedy on Lake Kariba: 44 Dead as National Disaster Declared')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
       <a class="article-card animate-in" href="articles/congo-ebola-worst-ever.html">
         <div class="card-img-wrap">
           <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=80" alt="Congo Ebola" loading="lazy">
@@ -323,7 +412,7 @@
         <div class="card-body">
           <span class="card-category cat-current">Current Affairs</span>
           <h3 class="card-title">Congo's Ebola Outbreak on Track to Become the Deadliest in History</h3>
-          <p class="card-excerpt">The WHO chief warns the DRC outbreak could surpass the worst on record. A rare strain in a conflict zone makes this one of the hardest fights yet.</p>
+          <p class="card-excerpt">The WHO warns the DRC outbreak could surpass records as rare strains and regional instability complicate rapid medical deployment.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>August 13, 2026</span>
@@ -340,7 +429,7 @@
         <div class="card-body">
           <span class="card-category cat-trending">Current Affairs</span>
           <h3 class="card-title">The Rise of Agentic AI: Autonomous Workforces Reshaping Industry</h3>
-          <p class="card-excerpt">The technology landscape in 2026 has shifted from chatbots to autonomous agentic AI workforces that plan, execute, and self-correct.</p>
+          <p class="card-excerpt">The technology landscape has shifted from chatbots to autonomous agentic AI workforces that plan, execute, and self-correct complex workflows.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>August 13, 2026</span>
@@ -363,6 +452,24 @@
       <a href="#motivation" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
+      <a class="article-card animate-in" href="articles/the-90-minute-focus-protocol.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80" alt="Focus Protocol" loading="lazy">
+          <span class="badge-latest">October 2026</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-motivation">Motivation</span>
+          <h3 class="card-title">The 90-Minute Focus Protocol: Why High Performers Are Abandoning 12-Hour Hustle Culture</h3>
+          <p class="card-excerpt">The science of ultradian rhythm deep work: how two uninterrupted 90-minute sprints generate 300% more output than frantic 12-hour workdays.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>October 18, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('The 90-Minute Focus Protocol: High Performers Abandon Hustle Culture')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
       <a class="article-card animate-in" href="articles/micro-habits-1-percent-rule.html">
         <div class="card-img-wrap">
           <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80" alt="1 Percent Rule" loading="lazy">
@@ -414,6 +521,23 @@
           </div>
         </div>
       </a>
+      <a class="article-card animate-in" href="articles/from-zero-to-hero.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="From Zero to Hero" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-motivation">Motivation</span>
+          <h3 class="card-title">From Zero to Hero: The Architecture of Rebuilding</h3>
+          <p class="card-excerpt">The psychological playbook for turning rock-bottom moments into the foundation of your biggest comeback.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>May 10, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('From Zero to Hero: The Architecture of Rebuilding')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -427,6 +551,42 @@
       <a href="#sports" class="view-all">View all &rarr;</a>
     </div>
     <div class="articles-grid">
+      <a class="article-card animate-in" href="articles/warriors-afcon-2027-qualifiers-triumph.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="Zimbabwe Warriors Football Victory" loading="lazy">
+          <span class="badge-latest">October 2026</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Warriors Stun Group Favorites: Zimbabwe's Remarkable Comeback in AFCON 2027 Qualifiers</h3>
+          <p class="card-excerpt">An unforgettable night of African football as Zimbabwe's Warriors roar back with tactical masterclass and a 92nd-minute winner to put qualification in reach.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>October 21, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Warriors Stun Group Favorites: AFCON 2027 Qualifiers')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card animate-in" href="articles/ballon-dor-2026-showdown.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&q=80" alt="Ballon d'Or Trophy" loading="lazy">
+          <span class="badge-latest">October 2026</span>
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Ballon d'Or 2026 Showdown: The Generational Shift in World Football</h3>
+          <p class="card-excerpt">As world football turns the page on the Messi-Ronaldo rivalry, Vinícius Jr, Rodri, Erling Haaland, and Jude Bellingham battle for the Ballon d'Or in Paris.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>October 19, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Ballon d\'Or 2026 Showdown: Generational Shift in World Football')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
       <a class="article-card animate-in" href="articles/champions-league-2026-upsets.html">
         <div class="card-img-wrap">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="Champions League" loading="lazy">
@@ -441,23 +601,6 @@
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
             </div>
             <button class="card-share" onclick="event.stopPropagation(); shareArticle('Champions League: Real Sociedad Stuns Bayern Munich')">&#128279; Share</button>
-          </div>
-        </div>
-      </a>
-      <a class="article-card animate-in" href="articles/habs-nhl-playoffs-miracle.html">
-        <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=600&q=80" alt="Habs OT Winner" loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="card-category cat-sports">Sports</span>
-          <h3 class="card-title">Montreal Canadiens Complete Game 7 OT Miracle</h3>
-          <p class="card-excerpt">Alex Newhook's overtime winner caps a miraculous Game 7 comeback for the Montreal Canadiens against the Buffalo Sabres.</p>
-          <div class="card-footer">
-            <div class="card-footer-left">
-              <span>August 13, 2026</span>
-              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
-            </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Montreal Canadiens Complete Game 7 OT Miracle')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -478,53 +621,6 @@
           </div>
         </div>
       </a>
-    </div>
-  </section>
-
-  <!-- SPORTS -->
-  <section id="sports" style="background: var(--bg-secondary);">
-    <div class="section-header">
-      <div>
-        <div class="section-tag">Game On</div>
-        <h2>Sports</h2>
-      </div>
-      <a href="#" class="view-all">View all &rarr;</a>
-    </div>
-    <div class="articles-grid">
-      <a class="article-card animate-in" href="articles/fifa-world-cup-2026.html">
-        <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" alt="World Cup" loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="card-category cat-sports">Sports</span>
-          <h3 class="card-title">2026 FIFA World Cup: Sweden Dominates Tunisia 5-1</h3>
-          <p class="card-excerpt">The 2026 FIFA World Cup is well underway, with Sweden securing a decisive 5-1 victory over Tunisia in a thrilling Group F matchup in Guadalupe, Mexico.</p>
-          <div class="card-footer">
-            <div class="card-footer-left">
-              <span>July 1, 2026</span>
-              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5 min</span>
-            </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('2026 FIFA World Cup: Sweden Dominates Tunisia 5-1')">&#128279; Share</button>
-          </div>
-        </div>
-      </a>
-      <a class="article-card animate-in" href="articles/nba-playoffs-2026-finals.html">
-        <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1504450758481-7338bbe75005?w=600&q=80" alt="NBA Playoffs" loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="card-category cat-sports">Sports</span>
-          <h3 class="card-title">NBA Playoffs 2026: Who's Making the Finals?</h3>
-          <p class="card-excerpt">The 2026 NBA Playoffs have delivered chaos. Each conference matchup broken down, MVP candidates, and the rookie nobody expected to average 25+ in the postseason.</p>
-          <div class="card-footer">
-            <div class="card-footer-left">
-              <span>June 30, 2026</span>
-              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
-            </div>
-            <button class="card-share" onclick="event.stopPropagation(); shareArticle('NBA Playoffs 2026: Who\'s Making the Finals?')">&#128279; Share</button>
-          </div>
-        </div>
-      </a>
       <a class="article-card animate-in" href="articles/rise-of-african-football.html">
         <div class="card-img-wrap">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="African Football" loading="lazy">
@@ -532,13 +628,30 @@
         <div class="card-body">
           <span class="card-category cat-sports">Sports</span>
           <h3 class="card-title">The Rise of African Football on the World Stage</h3>
-          <p class="card-excerpt">From Victor Osimhen to Mohammed Kudus, African players are leading their clubs to titles. The pipeline from Lagos to London is producing world-class talent at an unprecedented rate.</p>
+          <p class="card-excerpt">From Victor Osimhen to Mohammed Kudus, African players are leading European clubs to trophies and reshaping the continental sporting narrative.</p>
           <div class="card-footer">
             <div class="card-footer-left">
               <span>May 16, 2026</span>
               <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 7 min</span>
             </div>
             <button class="card-share" onclick="event.stopPropagation(); shareArticle('The Rise of African Football on the World Stage')">&#128279; Share</button>
+          </div>
+        </div>
+      </a>
+      <a class="article-card animate-in" href="articles/habs-nhl-playoffs-miracle.html">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=600&q=80" alt="Habs OT Winner" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-sports">Sports</span>
+          <h3 class="card-title">Montreal Canadiens Complete Game 7 OT Miracle</h3>
+          <p class="card-excerpt">Alex Newhook's overtime winner caps a miraculous Game 7 comeback for the Montreal Canadiens against the Buffalo Sabres.</p>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <span>August 13, 2026</span>
+              <span class="reading-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 4 min</span>
+            </div>
+            <button class="card-share" onclick="event.stopPropagation(); shareArticle('Montreal Canadiens Complete Game 7 OT Miracle')">&#128279; Share</button>
           </div>
         </div>
       </a>
@@ -591,6 +704,9 @@
       <a href="#current-affairs">Current Affairs</a>
       <a href="#motivation">Motivation</a>
       <a href="#sports">Sports</a>
+      <a href="quiz.html">Play Quiz</a>
+      <a href="spin.html">Spin Wheel</a>
+      <a href="fact-or-fiction.html">Fact vs Fiction</a>
       <a href="https://www.facebook.com/KOTCOMPS/" target="_blank" rel="noopener">Facebook</a>
     </div>
     <p class="footer-copy">&copy; 2026 KOTCOMPS. All rights reserved.</p>
@@ -605,11 +721,20 @@
         <button class="share-opt" onclick="shareToFacebook()">Facebook</button>
         <button class="share-opt" onclick="shareToTwitter()">Twitter / X</button>
         <button class="share-opt" onclick="shareToWhatsApp()">WhatsApp</button>
-        <button class="share-opt" onclick="copyLink()">Copy Link</button>
+        <button class="share-opt" onclick="copyModalLink()">Copy Link</button>
       </div>
       <button class="modal-close" onclick="closeModal()">Close</button>
     </div>
   </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notification" id="toastNotification">
+    <span class="toast-icon">✨</span>
+    <span id="toastMessage">Link copied to clipboard!</span>
+  </div>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top-btn" id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top">&uarr;</button>
 
   <script>
     const PAGE_URL = 'https://www.facebook.com/KOTCOMPS/';
@@ -644,11 +769,40 @@
       closeModal();
     }
 
-    function copyLink() {
+    function copyModalLink() {
       navigator.clipboard.writeText(PAGE_URL).then(() => {
-        alert('Link copied!');
+        showToast('Link copied to clipboard! ✨');
       });
       closeModal();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const msg = document.getElementById('toastMessage');
+      if (toast && msg) {
+        msg.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3500);
+      }
+    }
+
+    // Reading progress and back-to-top
+    window.addEventListener('scroll', () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (totalScroll / windowHeight) * 100;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) progressBar.style.width = scrollPercent + '%';
+
+      const backBtn = document.getElementById('backToTopBtn');
+      if (backBtn) {
+        if (totalScroll > 350) backBtn.classList.add('visible');
+        else backBtn.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Smooth scroll for anchor links
@@ -669,7 +823,7 @@
         if (entry.isIntersecting) {
           setTimeout(() => {
             entry.target.classList.add('visible');
-          }, i * 80);
+          }, i * 70);
           observer.unobserve(entry.target);
         }
       });
@@ -745,8 +899,8 @@
     }
 
     // DAILY POLL LOGIC
-    let pollVotes = JSON.parse(localStorage.getItem('kotcomps_poll_votes') || '[142, 98, 76, 54]');
-    let hasVoted = localStorage.getItem('kotcomps_has_voted') === 'true';
+    let pollVotes = JSON.parse(localStorage.getItem('kotcomps_poll_votes_oct2026') || '[184, 156, 121, 98]');
+    let hasVoted = localStorage.getItem('kotcomps_has_voted_oct2026') === 'true';
 
     function renderPoll() {
       const total = pollVotes.reduce((a, b) => a + b, 0);
@@ -770,12 +924,11 @@
       if (hasVoted) return;
       pollVotes[optionIdx]++;
       hasVoted = true;
-      localStorage.setItem('kotcomps_poll_votes', JSON.stringify(pollVotes));
-      localStorage.setItem('kotcomps_has_voted', 'true');
+      localStorage.setItem('kotcomps_poll_votes_oct2026', JSON.stringify(pollVotes));
+      localStorage.setItem('kotcomps_has_voted_oct2026', 'true');
       renderPoll();
     }
 
-    // Initialize poll on load
     document.addEventListener('DOMContentLoaded', renderPoll);
   </script>
 
